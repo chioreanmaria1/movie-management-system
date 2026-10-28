@@ -1,10 +1,12 @@
 package com.example.moviemanagement.model;
 
+import com.example.moviemanagement.repository.HasId;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Screening {
+public class Screening implements HasId {
     private String id;
     private String hallId;
     private String movieId;
