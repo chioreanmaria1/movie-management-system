@@ -1,6 +1,8 @@
 package com.example.moviemanagement.model;
 
-public class StaffAssignment {
+import com.example.moviemanagement.repository.HasId;
+
+public class StaffAssignment implements HasId {
     private String id;
     private String screeningId;
     private String staffId;

@@ -1,6 +1,8 @@
 package com.example.moviemanagement.model;
 
-public abstract class Staff {
+import com.example.moviemanagement.repository.HasId;
+
+public abstract class Staff implements HasId {
     public String id;
     public String name;
 

@@ -1,9 +1,11 @@
 package com.example.moviemanagement.model;
 
+import com.example.moviemanagement.repository.HasId;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Customer {
+public class Customer implements HasId {
     private String id;
     private String name;
     private boolean isAdult; //new attribute
