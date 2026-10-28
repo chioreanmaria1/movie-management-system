@@ -6,6 +6,7 @@ import java.util.List;
 public class Movie {
     private String id;
     private String title;
+    private String genre; //new attribute
     private int durationMin;
     private List<Screening> screenings;
 
@@ -14,6 +15,10 @@ public class Movie {
         this.title = title;
         this.durationMin = durationMin;
         this.screenings = new ArrayList<>();
+    }
+
+    public void addScreening(Screening screening){
+        screenings.add(screening);
     }
 
     public String getId() {

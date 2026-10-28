@@ -6,6 +6,7 @@ import java.util.List;
 public class Customer {
     private String id;
     private String name;
+    private boolean isAdult; //new attribute
     private List<Ticket> ticketList;
 
     public Customer(String id, String name) {

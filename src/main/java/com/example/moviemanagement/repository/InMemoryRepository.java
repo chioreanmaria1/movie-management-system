@@ -24,11 +24,14 @@ public abstract class InMemoryRepository<T extends HasId> implements BaseReposit
 
     @Override
     public T findById(String id) {
+        if(objects.containsKey(id)){
+            return objects.get(id);
+        }
         return null;
     }
 
     @Override
     public void delete(String id) {
-
+        objects.remove(id);
     }
 }
