@@ -1,5 +1,6 @@
 package com.example.moviemanagement.repository;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -19,7 +20,14 @@ public abstract class InMemoryRepository<T extends HasId> implements BaseReposit
 
     @Override
     public List<T>findAll() {
-        return null;
+        if (objects.isEmpty()){
+            System.out.println("There are no objects yet");
+        }
+        List<T> allObjects = new ArrayList<>();
+        for (T object: this.objects.values()){
+            allObjects.add(object);
+        }
+        return allObjects;
     }
 
     @Override
