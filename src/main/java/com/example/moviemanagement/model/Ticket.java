@@ -1,6 +1,8 @@
 package com.example.moviemanagement.model;
 
-public class Ticket {
+import com.example.moviemanagement.repository.HasId;
+
+public class Ticket implements HasId {
     private String id;
     private String screeningId;
     private String customerId;
