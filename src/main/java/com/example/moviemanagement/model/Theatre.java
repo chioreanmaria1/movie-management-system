@@ -7,6 +7,7 @@ public class Theatre {
     private String id;
     private String name;
     private String city;
+    private String phoneNumber; //new attribute
     private List<Hall> halls;
 
     public Theatre(String id, String name, String city) {
