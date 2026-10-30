@@ -1,4 +1,6 @@
 package com.example.moviemanagement.service;
+import org.springframework.stereotype.Service;
 
-public class CustomerService {
-}
+//Customer
+@Service
+public class CustomerService {}
