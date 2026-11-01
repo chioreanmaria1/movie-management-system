@@ -133,7 +133,7 @@ public class CinemaService {
         return seatRepository.findByHallId(id);
     }
 
-    public void deleteScreening(String id){
+    public void deleteScreening(String id){  //Affected: Ticket, StaffAssignment
         if(screeningRepository.findById(id) == null){
             throw new IllegalArgumentException("You can't delete a screening that doesn't exist!");
         }
