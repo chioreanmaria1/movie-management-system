@@ -3,6 +3,4 @@ import com.example.moviemanagement.model.Theatre;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class TheatreRepository extends InMemoryRepository<Theatre>{
-
-}
+public class TheatreRepository extends InMemoryRepository<Theatre>{}
