@@ -10,16 +10,26 @@ public class Hall implements HasId {
     private String name;
     private String theatreId;
     private int capacity;
+    private boolean isAvailable;
     private List<Seat> seats;
     private List<Screening> screenings;
 
-    public Hall(String id, String name, String theatreId, int capacity) {
+    public Hall(String id, String name, String theatreId, int capacity, boolean isAvailable) {
         this.id = id;
         this.name = name;
         this.theatreId = theatreId;
         this.capacity = capacity;
+        this.isAvailable = isAvailable;
         this.seats = new ArrayList<>();
         this.screenings = new ArrayList<>();
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
     public void addSeat(Seat seat){

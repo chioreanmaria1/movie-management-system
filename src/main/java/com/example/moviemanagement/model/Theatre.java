@@ -9,14 +9,14 @@ public class Theatre implements HasId {
     private String id;
     private String name;
     private String city;
-    private String phoneNumber; //new attribute
+    private boolean isAvailable;
     private List<Hall> halls;
 
-    public Theatre(String id, String name, String city, String phoneNumber) {
+    public Theatre(String id, String name, String city, boolean isAvailable) {
         this.id = id;
         this.name = name;
         this.city = city;
-        this.phoneNumber = phoneNumber;
+        this.isAvailable = isAvailable;
         this.halls = new ArrayList<>();
     }
 
@@ -52,11 +52,11 @@ public class Theatre implements HasId {
         return halls;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public boolean isAvailable() {
+        return isAvailable;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 }

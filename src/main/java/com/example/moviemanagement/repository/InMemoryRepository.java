@@ -20,9 +20,6 @@ public abstract class InMemoryRepository<T extends HasId> implements BaseReposit
 
     @Override
     public List<T>findAll() {
-//        if (objects.isEmpty()){
-//            System.out.println("There are no objects yet");
-//        }
         List<T> allObjects = new ArrayList<>();
         for (T object: this.objects.values()){
             allObjects.add(object);
