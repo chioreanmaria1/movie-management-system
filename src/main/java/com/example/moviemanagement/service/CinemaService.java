@@ -5,9 +5,9 @@ import com.example.moviemanagement.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+
 import java.util.List;
 
-//Theatre, Hall, Seat, Movie, Screening
 
 @Service
 public class CinemaService {
@@ -150,4 +150,24 @@ public class CinemaService {
         movieRepository.delete(id);
     }
 
+    public int numberOfHallsInTheatre(String theatreId){
+        if(theatreRepository.findById(theatreId) == null){
+            throw new IllegalArgumentException("Theatre with id "+theatreId+" does not exist!");
+        }
+        return hallRepository.findByTheatreId(theatreId).size();
+    }
+
+    public int numberOfSeatsInHall(String hallId){
+        if(hallRepository.findById(hallId) == null){
+            throw new IllegalArgumentException("Hall with id "+hallId+" does not exist!");
+        }
+        return seatRepository.findByHallId(hallId).size();
+    }
+
+    public int numberOfScreeningsOfMovie(String movieId){
+        if(movieRepository.findById(movieId) == null){
+            throw new IllegalArgumentException("Movie with id "+movieId+" does not exist!");
+        }
+        return screeningRepository.findByMovieId(movieId).size();
+    }
 }

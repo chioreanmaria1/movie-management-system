@@ -3,8 +3,8 @@ package com.example.moviemanagement.model;
 import com.example.moviemanagement.repository.HasId;
 
 public abstract class Staff implements HasId {
-    public String id;
-    public String name;
+    private String id;
+    private String name;
 
     public Staff(String id, String name) {
         this.id = id;

@@ -12,10 +12,11 @@ public class Theatre implements HasId {
     private String phoneNumber; //new attribute
     private List<Hall> halls;
 
-    public Theatre(String id, String name, String city) {
+    public Theatre(String id, String name, String city, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.city = city;
+        this.phoneNumber = phoneNumber;
         this.halls = new ArrayList<>();
     }
 
@@ -49,5 +50,13 @@ public class Theatre implements HasId {
 
     public List<Hall> getHalls() {
         return halls;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

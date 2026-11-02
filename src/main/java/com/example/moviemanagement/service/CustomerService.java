@@ -43,8 +43,8 @@ public class CustomerService {
         customerRepository.delete(id);
     }
 
-    public int ticketsOfCustomer(String id){
-        return ticketRepository.findByCustomerId(id).size();
+    public int ticketsOfCustomer(String customerId){
+        return ticketRepository.findByCustomerId(customerId).size();
     }
 
     public List<Customer> findCustomersWithMinTickets(int minimum){
