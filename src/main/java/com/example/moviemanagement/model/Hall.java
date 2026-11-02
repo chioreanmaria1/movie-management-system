@@ -13,7 +13,7 @@ public class Hall implements HasId {
     private List<Seat> seats;
     private List<Screening> screenings;
 
-    public Hall(String id, String name, String theatreId, int capacity, List<Seat> seats, List<Screening> screenings) {
+    public Hall(String id, String name, String theatreId, int capacity) {
         this.id = id;
         this.name = name;
         this.theatreId = theatreId;
