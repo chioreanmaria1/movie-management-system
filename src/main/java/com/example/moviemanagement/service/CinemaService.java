@@ -16,13 +16,15 @@ public class CinemaService {
     private final SeatRepository seatRepository;
     private final MovieRepository movieRepository;
     private final ScreeningRepository screeningRepository;
+    private final StaffAssignmentRepository staffAssignmentRepository;
 
-    public CinemaService(TheatreRepository theatreRepository, HallRepository hallRepository, SeatRepository seatRepository, MovieRepository movieRepository, ScreeningRepository screeningRepository) {
+    public CinemaService(TheatreRepository theatreRepository, HallRepository hallRepository, SeatRepository seatRepository, MovieRepository movieRepository, ScreeningRepository screeningRepository, StaffAssignmentRepository staffAssignmentRepository) {
         this.theatreRepository = theatreRepository;
         this.hallRepository = hallRepository;
         this.seatRepository = seatRepository;
         this.movieRepository = movieRepository;
         this.screeningRepository = screeningRepository;
+        this.staffAssignmentRepository = staffAssignmentRepository;
     }
 
     private boolean datesOverlap(Screening screening1, Screening screening2){
@@ -133,10 +135,11 @@ public class CinemaService {
         return seatRepository.findByHallId(id);
     }
 
-    public void deleteScreening(String id){  //Affected: Ticket, StaffAssignment
+    public void deleteScreening(String id){
         if(screeningRepository.findById(id) == null){
             throw new IllegalArgumentException("You can't delete a screening that doesn't exist!");
         }
+        staffAssignmentRepository.delete(id);
         screeningRepository.delete(id);
     }
 

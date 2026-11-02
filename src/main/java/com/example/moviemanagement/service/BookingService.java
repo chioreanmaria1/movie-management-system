@@ -1,12 +1,10 @@
 package com.example.moviemanagement.service;
 
 import com.example.moviemanagement.model.Customer;
+import com.example.moviemanagement.model.Movie;
 import com.example.moviemanagement.model.Screening;
 import com.example.moviemanagement.model.Ticket;
-import com.example.moviemanagement.repository.CustomerRepository;
-import com.example.moviemanagement.repository.ScreeningRepository;
-import com.example.moviemanagement.repository.SeatRepository;
-import com.example.moviemanagement.repository.TicketRepository;
+import com.example.moviemanagement.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,20 +17,22 @@ public class BookingService {
     private final TicketRepository ticketRepository;
     private final ScreeningRepository screeningRepository;
     private final SeatRepository seatRepository;
+    private final MovieRepository movieRepository;
 
 
-    public BookingService(CustomerRepository customerRepository, TicketRepository ticketRepository, ScreeningRepository screeningRepository, SeatRepository seatRepository) {
+    public BookingService(CustomerRepository customerRepository, TicketRepository ticketRepository, ScreeningRepository screeningRepository, SeatRepository seatRepository, MovieRepository movieRepository) {
         this.customerRepository = customerRepository;
         this.ticketRepository = ticketRepository;
         this.screeningRepository = screeningRepository;
         this.seatRepository = seatRepository;
+        this.movieRepository = movieRepository;
     }
 
-    //buy ticket, cancel ticket, get tickets de la clienti, get ticket de la screening
-
-    //buy ticket ----> salveaza biletul,
     ///trebuie verificat daca clientul poate cumpaar biletul
     public void saveTicket(Ticket ticket){
+        Screening screening = screeningRepository.findById(ticket.getScreeningId());
+        Movie movie = movieRepository.findById(screening.getMovieId());
+        Customer customer = customerRepository.findById(ticket.getCustomerId());
         if (customerRepository.findById(ticket.getCustomerId()) == null){
             throw new IllegalArgumentException("Customer doesn't exist!");
         }
@@ -41,6 +41,9 @@ public class BookingService {
         }
         if (seatRepository.findById(ticket.getSeatId()) == null){
             throw new IllegalArgumentException("Seat doesn't exist!");
+        }
+        if (movie != null && !customer.canWatch(movie)){
+            throw  new IllegalArgumentException("Customer is underaged and can't but this ticket");
         }
         ticketRepository.save(ticket);
     }
@@ -53,15 +56,6 @@ public class BookingService {
         ticketRepository.delete(id);
     }
 
-//    public List<Customer> findClientsFromATicket(String id){
-//        List<Customer> customers = new ArrayList<>();
-//        if (ticketRepository.findById(id) == null){
-//            throw new IllegalArgumentException("Ticket doesn't exist!");
-//        }
-//        for (Customer customer: customerRepository.findAll()){
-//            if(customer.)
-//        }
-//    }
     //toate biletele unui screening
     public List<Ticket> getTicketsByScreening(String screeningId){
         List <Ticket> screeningTickets = new ArrayList<>();
