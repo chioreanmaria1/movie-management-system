@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-//Staff, StaffAssignment, Screening
-
 @Service
 public class StaffService {
     public final StaffRepository staffRepository;
@@ -42,8 +40,18 @@ public class StaffService {
 
     public void deleteStaff(String id){
         if(staffRepository.findById(id) == null){
-            throw new IllegalArgumentException("Can't delete Staff that doesnt exist");
+            throw new IllegalArgumentException("Can't delete Staff that doesn't exist");
         }
+        List<String> assignmentIds = new ArrayList<>();
+        for(StaffAssignment assignment : staffAssignmentRepository.findAll()){
+            if(assignment.getStaffId().equals(id)){
+                assignmentIds.add(assignment.getId());
+            }
+        }
+        for(String assignmentId : assignmentIds){
+            staffAssignmentRepository.delete(assignmentId);
+        }
+
         staffRepository.delete(id);
     }
 
@@ -75,7 +83,7 @@ public class StaffService {
     public List<Staff> findStaffForScreening(String screeningId){
         Screening screening = screeningRepository.findById(screeningId);
         List<Staff> assignedStaff = new ArrayList<>();
-        for (StaffAssignment assignment: screening.getAssignments()){
+        for (StaffAssignment assignment: staffAssignmentRepository.findAll()){
             Staff staff = staffRepository.findById(assignment.getStaffId());
             if (staff != null) {
                 assignedStaff.add(staff);
