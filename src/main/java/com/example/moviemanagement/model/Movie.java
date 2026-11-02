@@ -8,7 +8,8 @@ import java.util.List;
 public class Movie implements HasId {
     private String id;
     private String title;
-    private String genre; //new attribute
+    private String genre;
+    private boolean isAgeRestricted;
     private int durationMin;
     private List<Screening> screenings;
 
@@ -58,5 +59,9 @@ public class Movie implements HasId {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public boolean isAgeRestricted() {
+        return isAgeRestricted;
     }
 }

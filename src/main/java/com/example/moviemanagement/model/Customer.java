@@ -53,4 +53,10 @@ public class Customer implements HasId {
     public void setAdult(boolean adult) {
         isAdult = adult;
     }
+    public boolean canWatch(Movie movie) {
+        if (movie.isAgeRestricted() && !this.isAdult()) {
+            return false;
+        }
+        return true;
+    }
 }
