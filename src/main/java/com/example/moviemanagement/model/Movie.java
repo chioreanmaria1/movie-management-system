@@ -12,9 +12,10 @@ public class Movie implements HasId {
     private int durationMin;
     private List<Screening> screenings;
 
-    public Movie(String id, String title, int durationMin, List<Screening> screenings) {
+    public Movie(String id, String title, String genre, int durationMin, List<Screening> screenings) {
         this.id = id;
         this.title = title;
+        this.genre = genre;
         this.durationMin = durationMin;
         this.screenings = new ArrayList<>();
     }
@@ -49,5 +50,13 @@ public class Movie implements HasId {
 
     public List<Screening> getScreenings() {
         return screenings;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 }
