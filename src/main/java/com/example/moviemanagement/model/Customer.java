@@ -8,7 +8,7 @@ import java.util.List;
 public class Customer implements HasId {
     private String id;
     private String name;
-    private boolean isAdult; //new attribute
+    private boolean isAdult;
     private List<Ticket> ticketList;
 
     public Customer(String id, String name, Boolean isAdult) {

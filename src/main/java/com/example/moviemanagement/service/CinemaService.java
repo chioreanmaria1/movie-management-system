@@ -46,14 +46,14 @@ public class CinemaService {
     public void saveTheatre(Theatre theatre){theatreRepository.save(theatre);}
 
     public void saveHall(Hall hall){
-        if(theatreRepository.findById(hall.getTheatreId())==null){
+        if(theatreRepository.findById(hall.getTheatreId())==null || !(theatreRepository.findById(hall.getTheatreId()).isAvailable())){
             throw new IllegalArgumentException("Hall cannot be added because the theatre with id "+hall.getTheatreId()+" does not exist!");
         }
         hallRepository.save(hall);
     }
 
     public void saveSeat(Seat seat){
-        if(hallRepository.findById(seat.getHallId())==null){
+        if(hallRepository.findById(seat.getHallId())==null || !(hallRepository.findById(seat.getHallId()).isAvailable())){
             throw new IllegalArgumentException("Seat cannot be added because the hall with id "+seat.getHallId()+" does not exist!");
         }
         seatRepository.save(seat);
@@ -141,7 +141,16 @@ public class CinemaService {
         if(screeningRepository.findById(id) == null){
             throw new IllegalArgumentException("You can't delete a screening that doesn't exist!");
         }
-        staffAssignmentRepository.delete(id);
+        List<String> assignmentIds = new ArrayList<>();
+        for(StaffAssignment assignment : staffAssignmentRepository.findAll()){
+            if(assignment.getScreeningId().equals(id)){
+                assignmentIds.add(assignment.getId());
+            }
+        }
+        for(String assignmentId : assignmentIds){
+            staffAssignmentRepository.delete(assignmentId);
+        }
+
         screeningRepository.delete(id);
     }
 

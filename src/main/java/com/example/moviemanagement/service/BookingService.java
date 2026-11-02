@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-//Customer, Ticket, Screening
 
 @Service
 public class BookingService {
@@ -27,11 +26,8 @@ public class BookingService {
         this.seatRepository = seatRepository;
         this.movieRepository = movieRepository;
     }
-
-    ///trebuie verificat daca clientul poate cumpaar biletul
     public void saveTicket(Ticket ticket){
         Screening screening = screeningRepository.findById(ticket.getScreeningId());
-        Movie movie = movieRepository.findById(screening.getMovieId());
         Customer customer = customerRepository.findById(ticket.getCustomerId());
         if (customerRepository.findById(ticket.getCustomerId()) == null){
             throw new IllegalArgumentException("Customer doesn't exist!");
@@ -39,24 +35,21 @@ public class BookingService {
         if (screeningRepository.findById(ticket.getScreeningId()) == null){
             throw new IllegalArgumentException("Screening doesn't exist!");
         }
-        if (seatRepository.findById(ticket.getSeatId()) == null){
+        if (seatRepository.findById(ticket.getSeatId()) == null || !(seatRepository.findById(ticket.getSeatId()).isAvailable())){
             throw new IllegalArgumentException("Seat doesn't exist!");
         }
+        Movie movie = movieRepository.findById(screening.getMovieId());
         if (movie != null && !customer.canWatch(movie)){
             throw  new IllegalArgumentException("Customer is underaged and can't but this ticket");
         }
         ticketRepository.save(ticket);
     }
-    //ca daca stergi un ruicket, ar trebui si din lista de tickeet a clientului sa stergi
-    //trebuie sa sterg doar daca un customer nu are
     public void deleteTicket(String id){
         if (ticketRepository.findById(id) == null){
             throw new IllegalArgumentException("You can't delete a ticket that doesnt exist!");
         }
         ticketRepository.delete(id);
     }
-
-    //toate biletele unui screening
     public List<Ticket> getTicketsByScreening(String screeningId){
         List <Ticket> screeningTickets = new ArrayList<>();
         for (Ticket ticket: ticketRepository.findAll()){
