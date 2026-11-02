@@ -11,9 +11,10 @@ public class Customer implements HasId {
     private boolean isAdult; //new attribute
     private List<Ticket> ticketList;
 
-    public Customer(String id, String name) {
+    public Customer(String id, String name, Boolean isAdult) {
         this.id = id;
         this.name = name;
+        this.isAdult = isAdult;
         this.ticketList = new ArrayList<>();
     }
 
@@ -43,5 +44,13 @@ public class Customer implements HasId {
 
     public void setTicketList(List<Ticket> ticketList) {
         this.ticketList = ticketList;
+    }
+
+    public boolean isAdult() {
+        return isAdult;
+    }
+
+    public void setAdult(boolean adult) {
+        isAdult = adult;
     }
 }

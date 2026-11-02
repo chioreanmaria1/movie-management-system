@@ -6,7 +6,7 @@ public class Seat implements HasId {
     private String id;
     private String hallId;
     private String row;
-    private String collumn;
+    private String column;
 
     public void setId(String id) {
         this.id = id;
@@ -20,8 +20,8 @@ public class Seat implements HasId {
         this.row = row;
     }
 
-    public void setCollumn(String collumn) {
-        this.collumn = collumn;
+    public void setCollumn(String column) {
+        this.column = column;
     }
 
     public String getId() {
@@ -37,14 +37,14 @@ public class Seat implements HasId {
     }
 
     public String getCollumn() {
-        return collumn;
+        return column;
     }
 
-    public Seat(String id, String hallId, String row, String collumn) {
+    public Seat(String id, String hallId, String row, String column) {
         this.id = id;
         this.hallId = hallId;
         this.row = row;
-        this.collumn = collumn;
+        this.column = column;
     }
 }
 
