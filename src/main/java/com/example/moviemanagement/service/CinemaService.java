@@ -167,47 +167,79 @@ public class CinemaService {
     public void deleteTheatre(String id){
         Theatre theatre = theatreRepository.findById(id);
 
-        if(theatre == null || !theatre.isAvailable()){
-            throw new IllegalArgumentException("You can't delete a theatre that doesn't exist or isn't available!");
+        if(theatre == null){
+            throw new IllegalArgumentException("Theatre with id "+id+" doesn't exist!");
         }
 
-        theatre.setAvailable(false);
-        theatreRepository.save(theatre);
         List<Hall> halls = hallRepository.findByTheatreId(id);
         for(Hall hall: halls) {
-            hall.setAvailable(false);
-            hallRepository.save(hall);
-
             List<Seat> seats = seatRepository.findByHallId(hall.getId());
             for (Seat seat : seats) {
-                seat.setAvailable(false);
-                seatRepository.save(seat);
+                seatRepository.delete(seat.getId());
             }
+            hallRepository.delete(hall.getId());
         }
+        theatreRepository.delete(id);
     }
 
     public void deleteHall(String id){
         Hall hall = hallRepository.findById(id);
-        if(hall == null || !hall.isAvailable()){
-            throw new IllegalArgumentException("You can't delete a hall that doesn't exist or isn't available!");
+        if(hall == null){
+            throw new IllegalArgumentException("Hall with id "+id+" doesn't exist!");
         }
 
-        hall.setAvailable(false);
-        hallRepository.save(hall);
         List<Seat> seats = seatRepository.findByHallId(hall.getId());
         for (Seat seat : seats) {
-            seat.setAvailable(false);
-            seatRepository.save(seat);
+            seatRepository.delete(seat.getId());
         }
+        hallRepository.delete(hall.getId());
     }
 
     public void deleteSeat(String id){
         Seat seat = seatRepository.findById(id);
-        if(seat == null || !seat.isAvailable()){
-            throw new IllegalArgumentException("You can't delete a seat that doesn't exist or isn't available!");
+        if(seat == null){
+            throw new IllegalArgumentException("Seat with id "+id+" doesn't exist!");
         }
-        seat.setAvailable(false);
+        seatRepository.delete(seat.getId());
+    }
+
+    public void setSeatAvailability(String seatId, boolean availability){
+        Seat seat = seatRepository.findById(seatId);
+        if(seat == null){
+            throw new IllegalArgumentException("Seat with id "+seatId+" doesn't exist!");
+        }
+        seat.setAvailable(availability);
         seatRepository.save(seat);
+    }
+
+    public void setHallAvailability(String hallId, boolean availability){
+        Hall hall = hallRepository.findById(hallId);
+        if(hall == null){
+            throw new IllegalArgumentException("Hall with id "+hallId+" doesn't exist!");
+        }
+
+        List<Seat> seats = seatRepository.findByHallId(hallId);
+        for(Seat seat: seats){
+            setSeatAvailability(seat.getId(), availability);
+        }
+        hall.setAvailable(availability);
+        hallRepository.save(hall);
+    }
+
+    public void setTheatreAvailability(String theatreId, boolean availability){
+        Theatre theatre = theatreRepository.findById(theatreId);
+
+        if(theatre == null){
+            throw new IllegalArgumentException("Theatre with id "+theatreId+" doesn't exist!");
+        }
+
+        List<Hall> halls = hallRepository.findByTheatreId(theatreId);
+        for(Hall hall: halls){
+            setHallAvailability(hall.getId(),availability);
+        }
+
+        theatre.setAvailable(availability);
+        theatreRepository.save(theatre);
     }
 
     public int numberOfHallsInTheatre(String theatreId){
