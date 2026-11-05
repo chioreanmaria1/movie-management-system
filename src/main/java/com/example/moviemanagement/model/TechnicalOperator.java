@@ -1,17 +1,17 @@
 package com.example.moviemanagement.model;
 
 public class TechnicalOperator extends Staff{
-    private String specialization;
+    private Specialization specialization;
 
-    public String getSpecialization() {
+    public Specialization getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(String specialization) {
+    public void setSpecialization(Specialization specialization) {
         this.specialization = specialization;
     }
 
-    public TechnicalOperator(String id, String name, String specialization) {
+    public TechnicalOperator(String id, String name, Specialization specialization) {
         super(id, name);
         this.specialization = specialization;
 

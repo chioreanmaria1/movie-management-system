@@ -231,10 +231,10 @@ public class CinemaService {
         return screeningRepository.findByMovieId(movieId).size();
     }
 
-    public List<Movie> moviesByGenre(String genre){
+    public List<Movie> moviesByGenre(Genre genre){
         List<Movie> movies = new ArrayList<>();
         for(Movie movie: movieRepository.findAll()){
-            if(movie.getGenre().equals(genre)){
+            if(movie.getGenre() == genre){
                 movies.add(movie);
             }
         }
