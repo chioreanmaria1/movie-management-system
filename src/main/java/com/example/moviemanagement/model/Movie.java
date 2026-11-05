@@ -8,12 +8,12 @@ import java.util.List;
 public class Movie implements HasId {
     private String id;
     private String title;
-    private String genre;
+    private Genre genre; //enum
     private boolean isAgeRestricted;
     private int durationMin;
     private List<Screening> screenings;
 
-    public Movie(String id, String title, String genre, int durationMin, List<Screening> screenings) {
+    public Movie(String id, String title, Genre genre, int durationMin, List<Screening> screenings) {
         this.id = id;
         this.title = title;
         this.genre = genre;
@@ -53,11 +53,11 @@ public class Movie implements HasId {
         return screenings;
     }
 
-    public String getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
 
