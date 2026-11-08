@@ -20,6 +20,10 @@ public class Theatre implements HasId {
         this.halls = new ArrayList<>();
     }
 
+    public Theatre(){
+        this.halls = new ArrayList<>();
+    }
+
     public void addHall(Hall hall){
         halls.add(hall);
     }

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New theatre</title>
+</head>
+<body>
+<h1>New theatre</h1>
+<form th:action="@{/theatres}" th:object="${theatre}" method="post">
+    id: <input type="text" th:field="*{id}"> <br>
+    name: <input type="text" th:field="*{name}"> <br>
+    city: <input type="text" th:field="*{city}"> <br>
+    available: <input type="checkbox" th:field="*{available}"><br>
+    <button type = "submit">Save new theatre</button>
+</form>
+
+</body>
+</html>

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+//@Service
 public class StaffService {
     public final SupportStaffRepository supportStaffRepository;
     public final TechnicalOperatorRepository technicalOperatorRepository;
