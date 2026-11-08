@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Theatres</title>
+</head>
+<body>
+<h1>Theatres</h1>
+<p>
+    <a href="/theatres/new"> Add theatre</a>
+</p>
+
+<table border="2">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>city</th>
+        <th>available</th>
+        <th>delete item</th>
+    </tr>
+    <tr th:each="item: ${theatres}">
+        <td th:text="${item.id}">T1</td>
+        <td th:text="${item.name}">CinemaCity</td>
+        <td th:text="${item.city}">Cluj-Napoca</td>
+        <td th:text="${item.available}">true</td>
+        <td>
+            <form th:action="@{'/theatres/' +${item.id} + '/delete'}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
