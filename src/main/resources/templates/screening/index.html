@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Screenings</title>
+</head>
+<body>
+<h1>Screenings</h1>
+<p>
+    <a href="/screenings/new"> Add new screening</a>
+</p>
+
+<table border = "2">
+    <tr>
+        <th>id</th>
+        <th>hallId</th>
+        <th>movieId</th>
+        <th>date</th>
+        <th>delete</th>
+    </tr>
+    <tr th:each="screening: ${screenings}">
+        <td th:text="${screening.id}"></td>
+        <td th:text="${screening.hallId}"></td>
+        <td th:text="${screening.movieId}"></td>
+        <td th:text="${screening.date}"></td>
+        <td>
+            <form th:action="@{'/screenings/'+${screening.id}+'/delete'}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

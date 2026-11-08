@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New movie</title>
+</head>
+<body>
+<h1>New movie</h1>
+<form th:action="@{/movies}" th:object="${movie}" method="post">
+    id: <input type="text" th:field="*{id}"> <br>
+    title: <input type="text" th:field="*{title}"> <br>
+    genre: <select th:field="*{genre}">
+            <option th:each="genreItem: ${genres}" th:value="${genreItem}" th:text="${genreItem}"></option>
+        </select>
+    <br>
+    ageRestricted: <input type="checkbox" th:field="*{ageRestricted}"> <br>
+    durationMin: <input type="number" th:field="*{durationMin}"> <br>
+    <button type="submit">Save new movie</button>
+</form>
+</body>
+</html>
