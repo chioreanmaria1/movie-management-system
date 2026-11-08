@@ -3,6 +3,7 @@ package com.example.moviemanagement.repository;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.UUID;
 
 
 public abstract class InMemoryRepository<T extends HasId> implements BaseRepository<T>{
@@ -15,6 +16,10 @@ public abstract class InMemoryRepository<T extends HasId> implements BaseReposit
 
     @Override
     public void save(T object) {
+
+        if (object.getId() == null) {
+            object.setId(UUID.randomUUID().toString());
+        }
         this.objects.put(object.getId(), object);
     }
 

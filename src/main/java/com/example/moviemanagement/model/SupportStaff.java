@@ -1,18 +1,18 @@
 package com.example.moviemanagement.model;
 
 public class SupportStaff extends Staff{
-    private String role;
+    private Role role;
 
-    public SupportStaff(String id, String name, String role) {
+    public SupportStaff(String id, String name, Role role) {
         super(id, name);
         this.role = role;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 }
