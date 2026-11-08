@@ -18,29 +18,30 @@ public class CinemaService {
     private final MovieRepository movieRepository;
     private final ScreeningRepository screeningRepository;
     private final StaffAssignmentRepository staffAssignmentRepository;
+    private final TicketRepository ticketRepository;
 
-    public CinemaService(TheatreRepository theatreRepository, HallRepository hallRepository, SeatRepository seatRepository, MovieRepository movieRepository, ScreeningRepository screeningRepository, StaffAssignmentRepository staffAssignmentRepository) {
+    public CinemaService(TheatreRepository theatreRepository, HallRepository hallRepository, SeatRepository seatRepository, MovieRepository movieRepository, ScreeningRepository screeningRepository, StaffAssignmentRepository staffAssignmentRepository, TicketRepository ticketRepository) {
         this.theatreRepository = theatreRepository;
         this.hallRepository = hallRepository;
         this.seatRepository = seatRepository;
         this.movieRepository = movieRepository;
         this.screeningRepository = screeningRepository;
         this.staffAssignmentRepository = staffAssignmentRepository;
+        this.ticketRepository = ticketRepository;
     }
 
     private boolean datesOverlap(Screening screening1, Screening screening2){
         Movie movie1 = movieRepository.findById(screening1.getMovieId());
         Movie movie2 = movieRepository.findById(screening2.getMovieId());
-
+        if (movie1 == null || movie2 == null){
+            throw new IllegalArgumentException("Movie doesn't exist!");
+        }
         LocalDateTime startScreening1 = screening1.getDate();
         LocalDateTime endScreening1 = startScreening1.plusMinutes(movie1.getDurationMin());
         LocalDateTime startScreening2 = screening2.getDate();
         LocalDateTime endScreening2 = startScreening2.plusMinutes(movie2.getDurationMin());
 
-        if(endScreening1.isBefore(startScreening2) || endScreening2.isBefore(startScreening1) ){
-            return false;
-        }
-        return true;
+        return startScreening1.isBefore(endScreening2) && startScreening2.isBefore(endScreening1);
     }
 
     public void saveTheatre(Theatre theatre){theatreRepository.save(theatre);}
@@ -137,21 +138,32 @@ public class CinemaService {
         return seatRepository.findByHallId(id);
     }
 
-    public void deleteScreening(String id){
-        if(screeningRepository.findById(id) == null){
+    public void deleteScreening(String screeningId){
+        if(screeningRepository.findById(screeningId) == null){
             throw new IllegalArgumentException("You can't delete a screening that doesn't exist!");
+        }
+        if (screeningHasTickets(screeningId)){
+            throw new IllegalArgumentException("You can't delete this screening because it has tickets!");
         }
         List<String> assignmentIds = new ArrayList<>();
         for(StaffAssignment assignment : staffAssignmentRepository.findAll()){
-            if(assignment.getScreeningId().equals(id)){
+            if(assignment.getScreeningId().equals(screeningId)){
                 assignmentIds.add(assignment.getId());
             }
         }
-        for(String assignmentId : assignmentIds){
+        for(String assignmentId : assignmentIds) {
             staffAssignmentRepository.delete(assignmentId);
         }
+        screeningRepository.delete(screeningId);
+    }
 
-        screeningRepository.delete(id);
+    public boolean screeningHasTickets(String screeningId){
+        for (Ticket ticket: ticketRepository.findAll()){
+            if (ticket.getScreeningId().equals(screeningId)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void deleteMovie(String id){
@@ -263,10 +275,10 @@ public class CinemaService {
         return screeningRepository.findByMovieId(movieId).size();
     }
 
-    public List<Movie> moviesByGenre(String genre){
+    public List<Movie> moviesByGenre(Genre genre){
         List<Movie> movies = new ArrayList<>();
         for(Movie movie: movieRepository.findAll()){
-            if(movie.getGenre().equals(genre)){
+            if(movie.getGenre() == genre){
                 movies.add(movie);
             }
         }

@@ -2,19 +2,21 @@ package com.example.moviemanagement.model;
 
 import com.example.moviemanagement.repository.HasId;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+
 import java.util.List;
 
 public class Customer implements HasId {
     private String id;
     private String name;
-    private boolean isAdult;
+    private int birthYear;
     private List<Ticket> ticketList;
 
-    public Customer(String id, String name, Boolean isAdult) {
+    public Customer(String id, String name, int birthYear) {
         this.id = id;
         this.name = name;
-        this.isAdult = isAdult;
+        this.birthYear = birthYear;
         this.ticketList = new ArrayList<>();
     }
 
@@ -46,15 +48,17 @@ public class Customer implements HasId {
         this.ticketList = ticketList;
     }
 
-    public boolean isAdult() {
-        return isAdult;
+    public int getBirthYear() {
+        return birthYear;
     }
 
-    public void setAdult(boolean adult) {
-        isAdult = adult;
+    public void setBirthYear(int birthYear) {
+        this.birthYear = birthYear;
     }
+
     public boolean canWatch(Movie movie) {
-        if (movie.isAgeRestricted() && !this.isAdult()) {
+        int currentYear = LocalDate.now().getYear();
+        if (movie.isAgeRestricted() && (currentYear - this.birthYear < 18)) {
             return false;
         }
         return true;
