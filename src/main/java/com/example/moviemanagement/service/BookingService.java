@@ -73,7 +73,7 @@ public class BookingService {
         return ticketRepository.findById(id);
     }
 
-    public List<Ticket> getAllTickets(){
+    public List<Ticket> findAllTickets(){
         return ticketRepository.findAll();
     }
 
