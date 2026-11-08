@@ -24,6 +24,11 @@ public class Screening implements HasId {
         this.assignments = new ArrayList<>();
     }
 
+    public Screening(){
+        this.tickets = new ArrayList<>();
+        this.assignments= new ArrayList<>();
+    }
+
     public void addTicket(Ticket ticket){
         tickets.add(ticket);
     }

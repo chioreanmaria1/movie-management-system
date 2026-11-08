@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New screening</title>
+</head>
+<body>
+<h1>New screening</h1>
+<form th:action="@{/screenings}" th:object="${screening}" method="post">
+    id: <input type="text" th:field="*{id}"><br>
+    hallId: <input type="text" th:field="*{hallId}"><br>
+    movieId: <input type="text" th:field="*{movieId}"><br>
+    date: <input type="datetime-local" th:field="*{date}"><br>
+    <button type = "submit">Save new screening</button>
+</form>
+</body>
+</html>

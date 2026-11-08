@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Seats</title>
+</head>
+<body>
+<h1>Seats</h1>
+<a href="seats/new">Add new seat</a>
+<table border="2">
+    <tr>
+        <th>id</th>
+        <th>hallId</th>
+        <th>row</th>
+        <th>column</th>
+        <th>available</th>
+        <th>delete</th>
+    </tr>
+    <tr th:each="seat: ${seats}" >
+    <td th:text="${seat.id}"></td>
+    <td th:text="${seat.hallId}"></td>
+    <td th:text="${seat.row}"></td>
+    <td th:text="${seat.column}"></td>
+    <td th:text="${seat.available}"></td>
+    <td>
+        <form th:action="@{'/seats/'+${seat.id}+'/delete'}" method="post">
+            <button type="submit">Delete</button>
+        </form>
+    </td>
+    </tr>
+</table>
+</body>
+</html>

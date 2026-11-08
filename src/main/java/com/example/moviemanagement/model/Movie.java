@@ -21,6 +21,10 @@ public class Movie implements HasId {
         this.screenings = new ArrayList<>();
     }
 
+    public Movie(){
+        screenings = new ArrayList<>();
+    }
+
     public void addScreening(Screening screening){
         screenings.add(screening);
     }

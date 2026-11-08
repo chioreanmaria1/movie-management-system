@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>New theatre</title>
+    <title>New hall</title>
 </head>
 <body>
 <p> New hall </p>
@@ -10,7 +10,7 @@
     id: <input type="text" th:field="*{id}"> <br>
     name: <input type="text" th:field="*{name}"> <br>
     theatreId: <input type="text" th:field="*{theatreId}"> <br>
-    capacity: <input type="text" th:field="*{capacity}"> <br>
+    capacity: <input type="number" th:field="*{capacity}"> <br>
     available: <input type="checkbox" th:field="*{available}"> <br>
     <button type="submit">Save new hall</button>
 
