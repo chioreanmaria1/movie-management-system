@@ -24,6 +24,11 @@ public class Hall implements HasId {
         this.screenings = new ArrayList<>();
     }
 
+    public Hall(){
+        this.seats = new ArrayList<>();
+        this.screenings = new ArrayList<>();
+    }
+
     public boolean isAvailable() {
         return isAvailable;
     }

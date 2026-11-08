@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Theatres</title>
+</head>
+<body>
+<h1> Halls </h1>
+<a href="/halls/new">Add new hall</a>
+<table border="2">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>theatreId</th>
+        <th>capacity</th>
+        <th>available</th>
+    </tr>
+    <tr th:each="item: ${halls}">
+        <td th:text="${item.id}"> H1 </td>
+        <td th:text="${item.name}"> Hall1 </td>
+        <td th:text="${item.theatreId}"> T1 </td>
+        <td th:text="${item.capacity}"> 200 </td>
+        <td th:text="${item.available}"> true </td>
+        <td>
+            <form th:action="@{'/halls/'+${item.id}+'/delete'}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+</table>
+</body>
+</html>
