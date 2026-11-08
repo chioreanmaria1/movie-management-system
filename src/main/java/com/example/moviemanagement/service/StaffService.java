@@ -62,6 +62,9 @@ public class StaffService {
     public List<Staff> findAllTechnicalOperator(){
         return technicalOperatorRepository.findAll();
     }
+    public List<Staff> findAllTechnicalOperators(){
+        return findAllTechnicalOperator();
+    }
 
     public void deleteStaff(String staffId){
         Staff staff = findStaffById(staffId);

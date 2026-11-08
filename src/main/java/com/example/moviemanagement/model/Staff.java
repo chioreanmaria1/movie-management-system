@@ -11,6 +11,9 @@ public abstract class Staff implements HasId {
         this.name = name;
     }
 
+    public Staff() {
+    }
+
     public String getId() {
         return id;
     }
