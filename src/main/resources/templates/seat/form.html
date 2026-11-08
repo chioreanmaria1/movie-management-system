@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New theatre</title>
+</head>
+<body>
+<h1>New seat</h1>
+<form th:action="@{/seats}" th:object="${seat}" method="post">
+    id: <input type="text" th:field="*{id}"><br>
+    hallId: <input type="text" th:field="*{hallId}"><br>
+    row: <input type="text" th:field="*{row}"> <br>
+    column: <input type="text" th:field="*{column}"> <br>
+    available: <input type="text" th:field="*{available}"> <br>
+    <button type="submit">Save new seat</button>
+</form>
+</body>

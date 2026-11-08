@@ -17,6 +17,8 @@ public class Seat implements HasId {
         this.isAvailable = isAvailable;
     }
 
+    public Seat(){}
+
     public void setId(String id) {
         this.id = id;
     }
