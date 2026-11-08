@@ -1,9 +1,6 @@
 package com.example.moviemanagement.service;
 
-import com.example.moviemanagement.model.Customer;
-import com.example.moviemanagement.model.Movie;
-import com.example.moviemanagement.model.Screening;
-import com.example.moviemanagement.model.Ticket;
+import com.example.moviemanagement.model.*;
 import com.example.moviemanagement.repository.*;
 import org.springframework.stereotype.Service;
 
@@ -27,21 +24,33 @@ public class BookingService {
         this.movieRepository = movieRepository;
     }
     public void saveTicket(Ticket ticket){
+        //trebuie sa verific daca seat ul este available, daca scaunul apartine salii
         Screening screening = screeningRepository.findById(ticket.getScreeningId());
         Customer customer = customerRepository.findById(ticket.getCustomerId());
-        if (customerRepository.findById(ticket.getCustomerId()) == null){
+        Seat seat = seatRepository.findById(ticket.getSeatId());
+        List<Ticket> screeningTickets = getTicketsByScreening(ticket.getScreeningId());
+        if (customer == null){
             throw new IllegalArgumentException("Customer doesn't exist!");
         }
-        if (screeningRepository.findById(ticket.getScreeningId()) == null){
+        if (screening == null){
             throw new IllegalArgumentException("Screening doesn't exist!");
         }
-        if (seatRepository.findById(ticket.getSeatId()) == null || !(seatRepository.findById(ticket.getSeatId()).isAvailable())){
-            throw new IllegalArgumentException("Seat doesn't exist!");
+        if (seat == null || seat.isAvailable()){
+            throw new IllegalArgumentException("Seat doesn't exist or it is unavailable!");
         }
         Movie movie = movieRepository.findById(screening.getMovieId());
         if (movie != null && !customer.canWatch(movie)){
             throw  new IllegalArgumentException("Customer is underaged and can't but this ticket");
         }
+        for (Ticket ticket1: screeningTickets){
+            if (ticket1.getSeatId().equals(ticket.getSeatId())){
+                throw new IllegalArgumentException("Can't book a ticket for a seat that is already taken!");
+            }
+        }
+        if (!(seat.getHallId().equals(screening.getHallId()))){
+            throw new IllegalArgumentException("Seat doesn't belong to this hall!");
+        }
+
         ticketRepository.save(ticket);
     }
     public void deleteTicket(String id){
