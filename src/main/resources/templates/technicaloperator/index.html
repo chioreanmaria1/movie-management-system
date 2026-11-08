@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Technical Operators</title>
+</head>
+<body>
+<h1> Technical Operators </h1>
+<a href="/technicaloperators/new">Add new technical operator</a>
+<table border="2">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>specialization</th>
+    </tr>
+    <tr th:each="item: ${technicalOperators}">
+        <td th:text="${item.id}"> </td>
+        <td th:text="${item.name}"> </td>
+        <td th:text="${item.specialization}">  </td>
+        <td>
+            <form th:action="@{'/technicaloperators/'+${item.id}+'/delete'}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

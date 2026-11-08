@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New ticket</title>
+</head>
+<body>
+<p> New ticket </p>
+<form th:action="@{/tickets}" th:object="${ticket}" method="post">
+    id: <input type="text" th:field="*{id}"> <br>
+    screeningId: <input type="text" th:field="*{screeningId}"> <br>
+    customerId: <input type="text" th:field="*{customerId}"> <br>
+    seatId: <input type="text" th:field="*{seatId}"> <br>
+    price: <input type="text" th:field="*{price}"> <br>
+    <button type="submit">Save new ticket</button>
+
+</form>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Technical Operator</title>
+</head>
+<body>
+<p> New Technical Operator </p>
+<form th:action="@{/technicaloperators}" th:object="${technicalOperator}" method="post">
+    id: <input type="text" th:field="*{id}"> <br>
+    name: <input type="text" th:field="*{name}"> <br>
+    specialization: <input type="text" th:field="*{specialization}"> <br>
+    <button type="submit">Save new technical operator</button>
+
+</form>
+</body>
+</html>

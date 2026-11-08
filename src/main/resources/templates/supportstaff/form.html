@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Support Staff</title>
+</head>
+<body>
+<p> New Support Staff </p>
+<form th:action="@{/supportstaff}" th:object="${supportStaff}" method="post">
+    id: <input type="text" th:field="*{id}"> <br>
+    name: <input type="text" th:field="*{name}"> <br>
+    role: <input type="text" th:field="*{role}"> <br>
+    <button type="submit">Save new support staff</button>
+
+</form>
+</body>
+</html>

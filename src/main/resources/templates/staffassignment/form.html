@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Staff Assignment</title>
+</head>
+<body>
+<p> New Staff Assignment </p>
+<form th:action="@{/staffassignments}" th:object="${staffAssignment}" method="post">
+    id: <input type="text" th:field="*{id}"> <br>
+    screeningId: <input type="text" th:field="*{screeningId}"> <br>
+    staffId: <input type="text" th:field="*{staffId}"> <br>
+    <button type="submit">Save new staff assignment</button>
+
+</form>
+</body>
+</html>
