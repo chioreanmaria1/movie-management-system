@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Service
+@Service
 public class StaffService {
     public final SupportStaffRepository supportStaffRepository;
     public final TechnicalOperatorRepository technicalOperatorRepository;
@@ -113,9 +113,9 @@ public class StaffService {
     }
 
     public List<Staff> findStaffForScreening(String screeningId){
-        Screening screening = screeningRepository.findById(screeningId);
         List<Staff> assignedStaff = new ArrayList<>();
         for (StaffAssignment assignment: staffAssignmentRepository.findAll()){
+            if (!screeningId.equals(assignment.getScreeningId())) continue;
             Staff staff = findStaffById(assignment.getStaffId());
             if (staff != null) {
                 assignedStaff.add(staff);
