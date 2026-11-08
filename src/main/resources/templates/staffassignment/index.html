@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Assignments</title>
+</head>
+<body>
+<h1> Staff Assignments </h1>
+<a href="/staffassignments/new">Add new staff assignment</a>
+<table border="2">
+    <tr>
+        <th>id</th>
+        <th>screeningId</th>
+        <th>staffId</th>
+    </tr>
+    <tr th:each="item: ${staffAssignments}">
+        <td th:text="${item.id}"> </td>
+        <td th:text="${item.screeningId}"> </td>
+        <td th:text="${item.staffId}">  </td>
+        <td>
+            <form th:action="@{'/staffassignments/'+${item.id}+'/delete'}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

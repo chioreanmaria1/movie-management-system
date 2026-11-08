@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Support Staff</title>
+</head>
+<body>
+<h1> Support Staff </h1>
+<a href="/supportstaff/new">Add new support staff</a>
+<table border="2">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>role</th>
+    </tr>
+    <tr th:each="item: ${supportStaff}">
+        <td th:text="${item.id}"> </td>
+        <td th:text="${item.name}"> </td>
+        <td th:text="${item.role}">  </td>
+        <td>
+            <form th:action="@{'/supportstaff/'+${item.id}+'/delete'}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
