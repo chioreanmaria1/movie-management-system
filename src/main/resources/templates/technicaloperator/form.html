@@ -9,7 +9,9 @@
 <form th:action="@{/technicaloperators}" th:object="${technicalOperator}" method="post">
     id: <input type="text" th:field="*{id}"> <br>
     name: <input type="text" th:field="*{name}"> <br>
-    specialization: <input type="text" th:field="*{specialization}"> <br>
+    specialization: <select th:field="*{specialization}">
+            <option th:each="specializationItem: ${specializations}" th:value="${specializationItem}" th:text="${specializationItem}"></option>
+        </select> <br>
     <button type="submit">Save new technical operator</button>
 
 </form>

@@ -21,10 +21,10 @@ public class Customer implements HasId {
     }
 
     public Customer() {
-
+        ticketList = new ArrayList<>();
     }
 
-    public void addTickets(Ticket ticket){
+    public void addTicket(Ticket ticket){
         this.ticketList.add(ticket);
     }
 

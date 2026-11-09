@@ -9,7 +9,9 @@
 <form th:action="@{/supportstaff}" th:object="${supportStaff}" method="post">
     id: <input type="text" th:field="*{id}"> <br>
     name: <input type="text" th:field="*{name}"> <br>
-    role: <input type="text" th:field="*{role}"> <br>
+    role: <select th:field="*{role}">
+        <option th:each="roleItem: ${roles}" th:value="${roleItem}" th:text="${roleItem}"></option>
+    </select> <br>
     <button type="submit">Save new support staff</button>
 
 </form>

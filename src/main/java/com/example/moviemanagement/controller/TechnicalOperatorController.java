@@ -1,5 +1,6 @@
 package com.example.moviemanagement.controller;
 
+import com.example.moviemanagement.model.Specialization;
 import com.example.moviemanagement.model.TechnicalOperator;
 import com.example.moviemanagement.service.StaffService;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ public class TechnicalOperatorController {
     @GetMapping("/new")
     public String createTechnicalOperator(Model model){
         model.addAttribute("technicalOperator", new TechnicalOperator());
+        model.addAttribute("specializations", Specialization.values());
         return "technicaloperator/form";
     }
 

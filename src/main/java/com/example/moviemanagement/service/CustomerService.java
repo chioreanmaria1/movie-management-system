@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-//Customer, Tickets
 @Service
 public class CustomerService {
     private final CustomerRepository customerRepository;

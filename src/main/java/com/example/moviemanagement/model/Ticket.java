@@ -17,8 +17,7 @@ public class Ticket implements HasId {
         this.price = price;
     }
 
-    public Ticket() {
-    }
+    public Ticket() {}
 
     public String getId() {
         return id;
