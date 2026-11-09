@@ -7,8 +7,7 @@ public class StaffAssignment implements HasId {
     private String screeningId;
     private String staffId;
 
-    public StaffAssignment() {
-    }
+    public StaffAssignment() {}
 
     public StaffAssignment(String id, String screeningId, String staffId) {
         this.id = id;

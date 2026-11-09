@@ -9,7 +9,7 @@
 <form th:action="@{/customers}" th:object="${customer}" method="post">
     id: <input type="text" th:field="*{id}"> <br>
     name: <input type="text" th:field="*{name}"> <br>
-    birthYear: <input type="text" th:field="*{birthYear}"> <br>
+    birthYear: <input type="number" th:field="*{birthYear}"> <br>
     <button type="submit">Save new customer</button>
 
 </form>

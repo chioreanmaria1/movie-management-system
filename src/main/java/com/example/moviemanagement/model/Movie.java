@@ -8,15 +8,16 @@ import java.util.List;
 public class Movie implements HasId {
     private String id;
     private String title;
-    private Genre genre; //enum
+    private Genre genre;
     private boolean isAgeRestricted;
     private int durationMin;
     private List<Screening> screenings;
 
-    public Movie(String id, String title, Genre genre, int durationMin, List<Screening> screenings) {
+    public Movie(String id, String title, Genre genre, boolean isAgeRestricted, int durationMin, List<Screening> screenings) {
         this.id = id;
         this.title = title;
         this.genre = genre;
+        this.isAgeRestricted = isAgeRestricted;
         this.durationMin = durationMin;
         this.screenings = new ArrayList<>();
     }
@@ -67,5 +68,9 @@ public class Movie implements HasId {
 
     public boolean isAgeRestricted() {
         return isAgeRestricted;
+    }
+
+    public void setAgeRestricted(boolean ageRestricted) {
+        isAgeRestricted = ageRestricted;
     }
 }
