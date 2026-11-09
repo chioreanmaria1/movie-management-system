@@ -1,5 +1,6 @@
 package com.example.moviemanagement.controller;
 
+import com.example.moviemanagement.model.Role;
 import com.example.moviemanagement.model.SupportStaff;
 import com.example.moviemanagement.service.StaffService;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ public class SupportStaffController {
     @GetMapping("/new")
     public String createSupportStaff(Model model){
         model.addAttribute("supportStaff", new SupportStaff());
+        model.addAttribute("roles", Role.values());
         return "supportstaff/form";
     }
 

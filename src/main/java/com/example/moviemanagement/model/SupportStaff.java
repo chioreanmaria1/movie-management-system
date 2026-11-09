@@ -3,8 +3,7 @@ package com.example.moviemanagement.model;
 public class SupportStaff extends Staff{
     private Role role;
 
-    public SupportStaff() {
-    }
+    public SupportStaff() {}
 
     public SupportStaff(String id, String name, Role role) {
         super(id, name);

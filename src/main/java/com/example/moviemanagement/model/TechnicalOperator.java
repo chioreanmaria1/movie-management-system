@@ -11,12 +11,10 @@ public class TechnicalOperator extends Staff{
         this.specialization = specialization;
     }
 
-    public TechnicalOperator() {
-    }
+    public TechnicalOperator() {}
 
     public TechnicalOperator(String id, String name, Specialization specialization) {
         super(id, name);
         this.specialization = specialization;
-
     }
 }

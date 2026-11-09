@@ -24,7 +24,6 @@ public class BookingService {
         this.movieRepository = movieRepository;
     }
     public void saveTicket(Ticket ticket){
-        //trebuie sa verific daca seat ul este available, daca scaunul apartine salii
         Screening screening = screeningRepository.findById(ticket.getScreeningId());
         Customer customer = customerRepository.findById(ticket.getCustomerId());
         Seat seat = seatRepository.findById(ticket.getSeatId());
@@ -35,7 +34,7 @@ public class BookingService {
         if (screening == null){
             throw new IllegalArgumentException("Screening doesn't exist!");
         }
-        if (seat == null || seat.isAvailable()){
+        if (seat == null || !seat.isAvailable()){
             throw new IllegalArgumentException("Seat doesn't exist or it is unavailable!");
         }
         Movie movie = movieRepository.findById(screening.getMovieId());
