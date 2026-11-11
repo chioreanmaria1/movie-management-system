@@ -1,6 +1,7 @@
 package com.example.moviemanagement.model;
 
 import com.example.moviemanagement.repository.HasId;
+import java.time.Period;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,13 +11,13 @@ import java.util.List;
 public class Customer implements HasId {
     private String id;
     private String name;
-    private int birthYear;
+    private LocalDate birthDate;
     private List<Ticket> ticketList;
 
-    public Customer(String id, String name, int birthYear) {
+    public Customer(String id, String name, LocalDate birthYear) {
         this.id = id;
         this.name = name;
-        this.birthYear = birthYear;
+        this.birthDate = birthYear;
         this.ticketList = new ArrayList<>();
     }
 
@@ -52,17 +53,17 @@ public class Customer implements HasId {
         this.ticketList = ticketList;
     }
 
-    public int getBirthYear() {
-        return birthYear;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirthYear(int birthYear) {
-        this.birthYear = birthYear;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public boolean canWatch(Movie movie) {
-        int currentYear = LocalDate.now().getYear();
-        if (movie.isAgeRestricted() && (currentYear - this.birthYear < 18)) {
+        Period period = Period.between(this.birthDate, LocalDate.now());
+        if (movie.isAgeRestricted() && period.getYears() < 18) {
             return false;
         }
         return true;

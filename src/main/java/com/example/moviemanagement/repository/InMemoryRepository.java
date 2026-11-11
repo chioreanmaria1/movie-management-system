@@ -17,7 +17,7 @@ public abstract class InMemoryRepository<T extends HasId> implements BaseReposit
     @Override
     public void save(T object) {
 
-        if (object.getId() == null) {
+        if ((object.getId()).isEmpty()) {
             object.setId(UUID.randomUUID().toString());
         }
         this.objects.put(object.getId(), object);
