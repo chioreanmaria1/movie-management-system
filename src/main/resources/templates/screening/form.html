@@ -5,6 +5,8 @@
     <title>New screening</title>
 </head>
 <body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+
 <h1>New screening</h1>
 <form th:action="@{/screenings}" th:object="${screening}" method="post">
     id: <input type="text" th:field="*{id}"><br>

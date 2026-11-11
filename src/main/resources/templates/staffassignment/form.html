@@ -5,6 +5,7 @@
     <title>New Staff Assignment</title>
 </head>
 <body>
+<div th:replace="~{fragments/nav :: nav}"></div>
 <p> New Staff Assignment </p>
 <form th:action="@{/staffassignments}" th:object="${staffAssignment}" method="post">
     id: <input type="text" th:field="*{id}"> <br>
