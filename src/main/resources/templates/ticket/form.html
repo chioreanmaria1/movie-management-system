@@ -5,6 +5,8 @@
     <title>New ticket</title>
 </head>
 <body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+
 <p> New ticket </p>
 <form th:action="@{/tickets}" th:object="${ticket}" method="post">
     id: <input type="text" th:field="*{id}"> <br>

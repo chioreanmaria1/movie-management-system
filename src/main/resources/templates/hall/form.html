@@ -5,6 +5,8 @@
     <title>New hall</title>
 </head>
 <body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+
 <p> New hall </p>
 <form th:action="@{/halls}" th:object="${hall}" method="post">
     id: <input type="text" th:field="*{id}"> <br>

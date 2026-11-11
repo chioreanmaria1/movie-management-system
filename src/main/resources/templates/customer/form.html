@@ -5,6 +5,8 @@
     <title>New Customer</title>
 </head>
 <body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+
 <p> New Customer </p>
 <form th:action="@{/customers}" th:object="${customer}" method="post">
     id: <input type="text" th:field="*{id}"> <br>

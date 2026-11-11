@@ -5,6 +5,8 @@
     <title>New Technical Operator</title>
 </head>
 <body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+
 <p> New Technical Operator </p>
 <form th:action="@{/technicaloperators}" th:object="${technicalOperator}" method="post">
     id: <input type="text" th:field="*{id}"> <br>
