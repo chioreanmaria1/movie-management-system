@@ -38,4 +38,32 @@ public class TheatreController {
         service.deleteTheatre(id);
         return "redirect:/theatres";
     }
+
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable String id, Model model){
+        Theatre theatre = service.findTheatreById(id);
+        if(theatre == null){
+            return "redirect:/theatres";
+        }
+        model.addAttribute("theatre", theatre);
+        return "theatre/edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String updateTheatre(@PathVariable String id, @ModelAttribute Theatre theatre){
+        theatre.setId(id);
+        service.saveTheatre(theatre);
+        return "redirect:/theatres";
+    }
+
+    @GetMapping("/{id}")
+    public String details(@PathVariable String id, Model model){
+        Theatre theatre = service.findTheatreById(id);
+        if(theatre == null){
+            return "redirect:/theatres";
+        }
+        model.addAttribute("theatre", theatre);
+        model.addAttribute("halls", service.findHallsByTheatreId(id));
+        return "theatre/details";
+    }
 }

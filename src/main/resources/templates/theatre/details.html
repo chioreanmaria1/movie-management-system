@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Theatre details</title>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<h1>Theatre details</h1>
+<p> id: <span th:text="${theatre.id}"></span></p>
+<p>name: <span th:text="${theatre.name}"></span></p>
+<p>city: <span th:text="${theatre.city}"></span></p>
+<p>available: <span th:text="${theatre.available}"></span></p>
+
+<h2>Halls</h2>
+<table border="2" th:if="${!halls.isEmpty()}">
+    <tr>
+        <th>id</th>
+        <th>available</th>
+        <th>details</th>
+    </tr>
+    <tr th:each="hall : ${halls}">
+        <td th:text="${hall.id}"></td>
+        <td th:text="${hall.available}"></td>
+        <td><a th:href="@{'/halls/' + ${hall.id}}">Details</a></td>
+    </tr>
+</table>
+<p th:if="${halls.isEmpty()}">This theatre has no halls.</p>
+</body>
+</html>

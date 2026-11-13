@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit theatre</title>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+<h1>Edit theatre</h1>
+<form th:action="@{'/theatres/'+${theatre.id}+'/edit'}" th:object="${theatre}" method="post">
+    id: <input type="text" th:field="*{id}" readonly> <br>
+    name: <input type="text" th:field="*{name}"> <br>
+    city: <input type="text" th:field="*{city}"> <br>
+    available: <input type="checkbox" th:field="*{available}"><br>
+    <button type = "submit">Save changes</button>
+</form>
+</body>
+</html>

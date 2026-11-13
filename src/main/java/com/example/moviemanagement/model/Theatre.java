@@ -21,6 +21,7 @@ public class Theatre implements HasId {
     }
 
     public Theatre(){
+        this.isAvailable = true;
         this.halls = new ArrayList<>();
     }
 
