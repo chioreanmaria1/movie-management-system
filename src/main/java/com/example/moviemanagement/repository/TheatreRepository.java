@@ -2,5 +2,5 @@ package com.example.moviemanagement.repository;
 import com.example.moviemanagement.model.Theatre;
 import org.springframework.stereotype.Repository;
 
-@Repository
+//@Repository
 public class TheatreRepository extends InMemoryRepository<Theatre>{}

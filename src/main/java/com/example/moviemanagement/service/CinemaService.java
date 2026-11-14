@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 public class CinemaService {
-    private final TheatreRepository theatreRepository;
+    private final BaseRepository<Theatre> theatreRepository;
     private final HallRepository hallRepository;
     private final SeatRepository seatRepository;
     private final MovieRepository movieRepository;
@@ -20,7 +20,7 @@ public class CinemaService {
     private final StaffAssignmentRepository staffAssignmentRepository;
     private final TicketRepository ticketRepository;
 
-    public CinemaService(TheatreRepository theatreRepository, HallRepository hallRepository, SeatRepository seatRepository, MovieRepository movieRepository, ScreeningRepository screeningRepository, StaffAssignmentRepository staffAssignmentRepository, TicketRepository ticketRepository) {
+    public CinemaService(BaseRepository<Theatre> theatreRepository, HallRepository hallRepository, SeatRepository seatRepository, MovieRepository movieRepository, ScreeningRepository screeningRepository, StaffAssignmentRepository staffAssignmentRepository, TicketRepository ticketRepository) {
         this.theatreRepository = theatreRepository;
         this.hallRepository = hallRepository;
         this.seatRepository = seatRepository;
