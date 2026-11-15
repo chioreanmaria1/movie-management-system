@@ -1,8 +1,7 @@
 package com.example.moviemanagement.service;
 
 import com.example.moviemanagement.model.*;
-import com.example.moviemanagement.repository.*;
-import com.example.moviemanagement.repository.CustomerRepository;
+import com.example.moviemanagement.repository.memory.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
