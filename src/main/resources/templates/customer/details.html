@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer details</title>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<h1>Customer details</h1>
+<p>id: <span th:text="${customer.id}"></span></p>
+<p>name: <span th:text="${customer.name}"></span></p>
+<p>birthDate: <span th:text="${customer.birthDate}"></span></p>
+</body>
+</html>

@@ -13,16 +13,25 @@
     <tr>
         <th>id</th>
         <th>name</th>
-        <th>birthYear</th>
+        <th>birthDate</th>
+        <th>delete item</th>
+        <th>edit item</th>
+        <th>details</th>
     </tr>
     <tr th:each="item: ${customers}">
         <td th:text="${item.id}"> </td>
         <td th:text="${item.name}"> </td>
-        <td th:text="${item.birthDate}">  </td>
+        <td th:text="${item.birthDate}"> </td>
         <td>
             <form th:action="@{'/customers/'+${item.id}+'/delete'}" method="post">
                 <button type="submit">Delete</button>
             </form>
+        </td>
+        <td>
+            <a th:href="@{'/customers/' + ${item.id} + '/edit'}">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{'/customers/' + ${item.id}}">Details</a>
         </td>
     </tr>
 </table>
