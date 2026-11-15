@@ -19,6 +19,8 @@
         <th>movieId</th>
         <th>date</th>
         <th>delete</th>
+        <th>edit item</th>
+        <th>details</th>
     </tr>
     <tr th:each="screening: ${screenings}">
         <td th:text="${screening.id}"></td>
@@ -29,6 +31,12 @@
             <form th:action="@{'/screenings/'+${screening.id}+'/delete'}" method="post">
                 <button type="submit">Delete</button>
             </form>
+        </td>
+        <td>
+            <a th:href="@{'/screenings/'+${screening.id}+'/edit'}">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{'/screenings/'+${screening.id}}">Details</a>
         </td>
     </tr>
 </table>
