@@ -9,12 +9,12 @@ import java.util.List;
 
 @Service
 public class StaffService {
-    public final BaseRepository<Staff> supportStaffRepository;
-    public final BaseRepository<Staff> technicalOperatorRepository;
+    public final BaseRepository<SupportStaff> supportStaffRepository;
+    public final BaseRepository<TechnicalOperator> technicalOperatorRepository;
     public final BaseRepository<StaffAssignment> staffAssignmentRepository;
     public final BaseRepository<Screening> screeningRepository;
 
-    public StaffService(BaseRepository<Staff> supportStaffRepository, BaseRepository<Staff> technicalOperatorRepository, BaseRepository<StaffAssignment> staffAssignmentRepository, BaseRepository<Screening> screeningRepository) {
+    public StaffService(BaseRepository<SupportStaff> supportStaffRepository, BaseRepository<TechnicalOperator> technicalOperatorRepository, BaseRepository<StaffAssignment> staffAssignmentRepository, BaseRepository<Screening> screeningRepository) {
         this.supportStaffRepository = supportStaffRepository;
         this.technicalOperatorRepository = technicalOperatorRepository;
         this.staffAssignmentRepository = staffAssignmentRepository;
@@ -32,7 +32,7 @@ public class StaffService {
             if (technicalOperatorRepository.findById(staff.getId()) != null){
                 throw new IllegalArgumentException("Id " + staff.getId() + " is already in use!");
             }
-            supportStaffRepository.save(staff);
+            supportStaffRepository.save((SupportStaff) staff);
         }
         else if (staff instanceof TechnicalOperator){
             if (((TechnicalOperator) staff).getSpecialization() == null){
@@ -41,7 +41,7 @@ public class StaffService {
             if (supportStaffRepository.findById(staff.getId()) != null){
                 throw new IllegalArgumentException("Id " + staff.getId() + " is already in use!");
             }
-            technicalOperatorRepository.save(staff);
+            technicalOperatorRepository.save((TechnicalOperator) staff);
         }
         else{
             throw new IllegalArgumentException("Staff must be either SupportStaff or TechnicalOperator!");
@@ -61,10 +61,10 @@ public class StaffService {
     }
 
     public List<Staff> findAllSupportStaff(){
-        return supportStaffRepository.findAll();
+        return new ArrayList<>(supportStaffRepository.findAll());
     }
     public List<Staff> findAllTechnicalOperator(){
-        return technicalOperatorRepository.findAll();
+        return new ArrayList<>(technicalOperatorRepository.findAll());
     }
     public List<Staff> findAllTechnicalOperators(){
         return findAllTechnicalOperator();
