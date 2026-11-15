@@ -39,4 +39,29 @@ public class HallController {
         service.deleteHall(id);
         return "redirect:/halls";
     }
+
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable String id, Model model){
+        Hall hall = service.findHallById(id);
+        model.addAttribute("hall", hall);
+        return "hall/edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String updateHall(@PathVariable String id, @ModelAttribute Hall hall){
+        Hall originalHall = service.findHallById(id);
+        hall.setId(id);
+        hall.setTheatreId(originalHall.getTheatreId());
+        service.saveHall(hall);
+        return "redirect:/halls";
+    }
+
+    @GetMapping("/{id}")
+    public String details(@PathVariable String id, Model model){
+        Hall hall = service.findHallById(id);
+        model.addAttribute("hall", hall);
+        model.addAttribute("seats", service.findSeatsByHallId(id));
+        model.addAttribute("screenings", service.findScreeningsByHallId(id));
+        return "hall/details";
+    }
 }

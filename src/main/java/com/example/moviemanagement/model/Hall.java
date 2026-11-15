@@ -14,12 +14,12 @@ public class Hall implements HasId {
     private List<Seat> seats;
     private List<Screening> screenings;
 
-    public Hall(String id, String name, String theatreId, int capacity, boolean isAvailable) {
+    public Hall(String id, String name, String theatreId, int capacity, boolean available) {
         this.id = id;
         this.name = name;
         this.theatreId = theatreId;
         this.capacity = capacity;
-        this.isAvailable = isAvailable;
+        this.isAvailable = available;
         this.seats = new ArrayList<>();
         this.screenings = new ArrayList<>();
     }
