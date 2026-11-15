@@ -69,6 +69,9 @@ public class BookingService {
     }
 
     public Ticket findTicketById(String id){
+        if (ticketRepository.findById(id) == null){
+            throw new IllegalArgumentException("Ticket with the id" + id + "not found!");
+        }
         return ticketRepository.findById(id);
     }
 

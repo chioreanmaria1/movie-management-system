@@ -56,7 +56,11 @@ public class StaffService {
         if (staff != null){
             return staff;
         }
-        return technicalOperatorRepository.findById(staffId);
+        staff = technicalOperatorRepository.findById(staffId);
+        if (staff == null){
+            throw new IllegalArgumentException("Staff member with id " + staffId + " not found!");
+        }
+        return staff;
     }
 
     public List<Staff> findAllSupportStaff(){
@@ -71,9 +75,6 @@ public class StaffService {
 
     public void deleteStaff(String staffId){
         Staff staff = findStaffById(staffId);
-        if(staff == null){
-            throw new IllegalArgumentException("Can't delete Staff that doesn't exist");
-        }
         List<String> assignmentIds = new ArrayList<>();
         for(StaffAssignment assignment : staffAssignmentRepository.findAll()){
             if(assignment.getStaffId().equals(staffId)){
@@ -94,9 +95,6 @@ public class StaffService {
 
     public void saveStaffAssignment(StaffAssignment staffAssignment){
         Staff staff = findStaffById(staffAssignment.getStaffId());
-        if (staff == null){
-            throw new IllegalArgumentException("Staff doesn't exist");
-        }
         if(screeningRepository.findById(staffAssignment.getScreeningId()) == null){
             throw new IllegalArgumentException("Screening doesn't exist!!!");
         }
@@ -123,9 +121,7 @@ public class StaffService {
         for (StaffAssignment assignment: staffAssignmentRepository.findAll()){
             if (!screeningId.equals(assignment.getScreeningId())) continue;
             Staff staff = findStaffById(assignment.getStaffId());
-            if (staff != null) {
-                assignedStaff.add(staff);
-            }
+            assignedStaff.add(staff);
         }
         return assignedStaff;
     }
