@@ -13,17 +13,18 @@ public class Movie implements HasId {
     private int durationMin;
     private List<Screening> screenings;
 
-    public Movie(String id, String title, Genre genre, boolean isAgeRestricted, int durationMin, List<Screening> screenings) {
+    public Movie(String id, String title, Genre genre, boolean ageRestricted, int durationMin, List<Screening> screenings) {
         this.id = id;
         this.title = title;
         this.genre = genre;
-        this.isAgeRestricted = isAgeRestricted;
+        this.isAgeRestricted = ageRestricted;
         this.durationMin = durationMin;
         this.screenings = new ArrayList<>();
     }
 
     public Movie(){
         screenings = new ArrayList<>();
+        isAgeRestricted = true;
     }
 
     public void addScreening(Screening screening){

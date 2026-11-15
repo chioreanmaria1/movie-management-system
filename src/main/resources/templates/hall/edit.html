@@ -7,7 +7,7 @@
 <body>
 <div th:replace="~{fragments/nav :: nav}"></div>
 <h1>Edit hall</h1>
-<form th:actin="@{'/halls/'+${hall.id}+'/edit'}" th:object="${hall}" method="post">
+<form th:action="@{'/halls/'+${hall.id}+'/edit'}" th:object="${hall}" method="post">
     id: <span th:text="${hall.id}"></span> <br>
     name: <input type="text" th:field="*{name}"><br>
     theatreId: <span th:text="${hall.theatreId}"></span> <br>
