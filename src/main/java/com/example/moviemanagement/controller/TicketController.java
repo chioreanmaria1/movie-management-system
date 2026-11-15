@@ -1,6 +1,5 @@
 package com.example.moviemanagement.controller;
 
-
 import com.example.moviemanagement.model.Ticket;
 import com.example.moviemanagement.service.BookingService;
 import org.springframework.stereotype.Controller;
@@ -9,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/tickets")
-public class TicketController{
+public class TicketController {
     private final BookingService bookingService;
 
     public TicketController(BookingService bookingService) {
@@ -18,7 +17,7 @@ public class TicketController{
 
     @GetMapping
     public String findAllTickets(Model model){
-        model.addAttribute("tickets",bookingService.findAllTickets());
+        model.addAttribute("tickets", bookingService.findAllTickets());
         return "ticket/index";
     }
 
@@ -33,10 +32,29 @@ public class TicketController{
         bookingService.saveTicket(ticket);
         return "redirect:/tickets";
     }
-    @PostMapping("{id}/delete")
+
+    @PostMapping("/{id}/delete")
     public String deleteTicket(@PathVariable String id){
         bookingService.deleteTicket(id);
         return "redirect:/tickets";
     }
 
+    @GetMapping("/{id}")
+    public String details(Model model, @PathVariable String id){
+        model.addAttribute("ticket", bookingService.findTicketById(id));
+        return "ticket/details";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable String id){
+        model.addAttribute("ticket", bookingService.findTicketById(id));
+        return "ticket/edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String updateTicket(@PathVariable String id, @ModelAttribute Ticket ticket){
+        ticket.setId(id);
+        bookingService.saveTicket(ticket);
+        return "redirect:/tickets";
+    }
 }

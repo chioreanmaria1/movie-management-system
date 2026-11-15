@@ -43,7 +43,7 @@ public class BookingService {
             throw  new IllegalArgumentException("Customer is underaged and can't but this ticket");
         }
         for (Ticket ticket1: screeningTickets){
-            if (ticket1.getSeatId().equals(ticket.getSeatId())){
+            if (!ticket1.getId().equals(ticket.getId()) && ticket1.getSeatId().equals(ticket.getSeatId())){
                 throw new IllegalArgumentException("Can't book a ticket for a seat that is already taken!");
             }
         }

@@ -22,7 +22,7 @@ public class StaffService {
     }
 
     public void saveStaff(Staff staff){
-        if (staff.getName() == null){
+        if (staff.getName() == null || staff.getName().trim().isEmpty()){
             throw new IllegalArgumentException("Staff must have a name!");
         }
         if (staff instanceof SupportStaff){
