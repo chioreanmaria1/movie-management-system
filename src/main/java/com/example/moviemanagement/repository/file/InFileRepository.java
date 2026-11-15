@@ -1,5 +1,7 @@
-package com.example.moviemanagement.repository;
+package com.example.moviemanagement.repository.file;
 
+import com.example.moviemanagement.repository.BaseRepository;
+import com.example.moviemanagement.repository.HasId;
 import tools.jackson.core.JacksonException;
 import tools.jackson.databind.JavaType;
 import tools.jackson.databind.ObjectMapper;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public abstract class InFileRepository<T extends HasId> implements BaseRepository<T>{
+public abstract class InFileRepository<T extends HasId> implements BaseRepository<T> {
     private final File file;
     private final ObjectMapper objectMapper;
     private final JavaType listType;

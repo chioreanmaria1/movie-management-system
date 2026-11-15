@@ -1,4 +1,4 @@
-package com.example.moviemanagement.repository;
+package com.example.moviemanagement.repository.memory;
 
 import com.example.moviemanagement.model.Staff;
 import org.springframework.stereotype.Repository;

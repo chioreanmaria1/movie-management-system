@@ -2,6 +2,7 @@ package com.example.moviemanagement.service;
 
 import com.example.moviemanagement.model.*;
 import com.example.moviemanagement.repository.*;
+import com.example.moviemanagement.repository.memory.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -73,7 +74,7 @@ public class CinemaService {
             throw new IllegalArgumentException("Screening cannot be added because the movie with id "+ screening.getMovieId()+" does not exist!");
         }
 
-        for(Screening object: screeningRepository.findByHallId(screening.getHallId())){
+        for(Screening object: findScreeningsByHallId(screening.getHallId())){
             if(!object.getId().equals(screening.getId()) && datesOverlap(object, screening)){
                 throw new IllegalArgumentException("Screening cannot be saved because its date overlaps with the other screenings");
             }
@@ -123,19 +124,43 @@ public class CinemaService {
     }
 
     public List<Hall> findHallsByTheatreId(String id){
-        return hallRepository.findByTheatreId(id);
+        List<Hall> halls = new ArrayList<>();
+        for(Hall hall: hallRepository.findAll()){
+            if(hall.getTheatreId().equals(id)){
+                halls.add(hall);
+            }
+        }
+        return halls;
     }
 
     public List<Screening> findScreeningsByHallId(String id){
-        return screeningRepository.findByHallId(id);
+        List<Screening> screenings = new ArrayList<>();
+        for(Screening screening: screeningRepository.findAll()){
+            if(screening.getHallId().equals(id)){
+                screenings.add(screening);
+            }
+        }
+        return screenings;
     }
 
     public List<Screening> findScreeningsByMovieId(String id){
-        return screeningRepository.findByMovieId(id);
+        List<Screening> screenings = new ArrayList<>();
+        for(Screening screening: screeningRepository.findAll()){
+            if(screening.getMovieId().equals(id)){
+                screenings.add(screening);
+            }
+        }
+        return screenings;
     }
 
     public List<Seat> findSeatsByHallId(String id){
-        return seatRepository.findByHallId(id);
+        List<Seat> seats = new ArrayList<>();
+        for(Seat seat: seatRepository.findAll()){
+            if(seat.getHallId().equals(id)){
+                seats.add(seat);
+            }
+        }
+        return seats;
     }
 
     public void deleteScreening(String screeningId){
@@ -170,7 +195,7 @@ public class CinemaService {
         if(movieRepository.findById(id) == null){
             throw new IllegalArgumentException("You can't delete a movie that doesn't exist!");
         }
-        if (!screeningRepository.findByMovieId(id).isEmpty()) {
+        if (!findScreeningsByMovieId(id).isEmpty()) {
             throw new IllegalArgumentException("Movie with id " + id + " cannot be deleted because it has screenings!");
         }
         movieRepository.delete(id);
@@ -183,9 +208,9 @@ public class CinemaService {
             throw new IllegalArgumentException("Theatre with id "+id+" doesn't exist!");
         }
 
-        List<Hall> halls = hallRepository.findByTheatreId(id);
+        List<Hall> halls = findHallsByTheatreId(id);
         for(Hall hall: halls) {
-            List<Seat> seats = seatRepository.findByHallId(hall.getId());
+            List<Seat> seats = findSeatsByHallId(hall.getId());
             for (Seat seat : seats) {
                 seatRepository.delete(seat.getId());
             }
@@ -200,7 +225,7 @@ public class CinemaService {
             throw new IllegalArgumentException("Hall with id "+id+" doesn't exist!");
         }
 
-        List<Seat> seats = seatRepository.findByHallId(hall.getId());
+        List<Seat> seats = findSeatsByHallId(hall.getId());
         for (Seat seat : seats) {
             seatRepository.delete(seat.getId());
         }
@@ -230,7 +255,7 @@ public class CinemaService {
             throw new IllegalArgumentException("Hall with id "+hallId+" doesn't exist!");
         }
 
-        List<Seat> seats = seatRepository.findByHallId(hallId);
+        List<Seat> seats = findSeatsByHallId(hallId);
         for(Seat seat: seats){
             setSeatAvailability(seat.getId(), availability);
         }
@@ -245,7 +270,7 @@ public class CinemaService {
             throw new IllegalArgumentException("Theatre with id "+theatreId+" doesn't exist!");
         }
 
-        List<Hall> halls = hallRepository.findByTheatreId(theatreId);
+        List<Hall> halls = findHallsByTheatreId(theatreId);
         for(Hall hall: halls){
             setHallAvailability(hall.getId(),availability);
         }
@@ -258,21 +283,21 @@ public class CinemaService {
         if(theatreRepository.findById(theatreId) == null){
             throw new IllegalArgumentException("Theatre with id "+theatreId+" does not exist!");
         }
-        return hallRepository.findByTheatreId(theatreId).size();
+        return findHallsByTheatreId(theatreId).size();
     }
 
     public int numberOfSeatsInHall(String hallId){
         if(hallRepository.findById(hallId) == null){
             throw new IllegalArgumentException("Hall with id "+hallId+" does not exist!");
         }
-        return seatRepository.findByHallId(hallId).size();
+        return findSeatsByHallId(hallId).size();
     }
 
     public int numberOfScreeningsOfMovie(String movieId){
         if(movieRepository.findById(movieId) == null){
             throw new IllegalArgumentException("Movie with id "+movieId+" does not exist!");
         }
-        return screeningRepository.findByMovieId(movieId).size();
+        return findScreeningsByMovieId(movieId).size();
     }
 
     public List<Movie> moviesByGenre(Genre genre){
