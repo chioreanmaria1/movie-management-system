@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit seat</title>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+<h1>Edit seat</h1>
+<form th:action="@{'/seats/' + ${seat.id} + '/edit'}" th:object="${seat}" method="post">
+    id: <span th:text="${seat.id}"></span> <br>
+    hallId: <span th:text="${seat.hallId}"></span> <br>
+    row: <input type="text" th:field="*{row}"> <br>
+    column: <input type="text" th:field="*{column}"> <br>
+    available: <input type="checkbox" th:field="*{available}"><br>
+    <button type = "submit">Save changes</button>
+</form>
+</body>
+</html>

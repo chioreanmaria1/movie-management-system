@@ -47,7 +47,7 @@ public abstract class InFileRepository<T extends HasId> implements BaseRepositor
 
     @Override
     public void save(T item){
-        if ((item.getId()).isEmpty()) {
+        if (item.getId() == null ||item.getId().isEmpty()) {
             item.setId(UUID.randomUUID().toString());
         }
         List<T> items = findAll();

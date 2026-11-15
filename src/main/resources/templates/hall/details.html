@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hall details</title>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<h1>Hall details</h1>
+<p>id: <span th:text="${hall.id}"></span></p>
+<p>name: <span th:text="${hall.name}"></span></p>
+<p>theatreId: <span th:text="${hall.theatreId}"></span></p>
+<p>capacity: <span th:text="${hall.capacity}"></span></p>
+<p>available: <span th:text="${hall.available}"></span></p>
+
+<h2>Seats</h2>
+<table border="2" th:if="${!seats.isEmpty()}">
+    <tr>
+        <th>id</th>
+        <th>hallId</th>
+        <th>row</th>
+        <th>column</th>
+        <th>available</th>
+        <th>details</th>
+    </tr>
+    <tr th:each="seat: ${seats}" >
+        <td th:text="${seat.id}"></td>
+        <td th:text="${seat.hallId}"></td>
+        <td th:text="${seat.row}"></td>
+        <td th:text="${seat.column}"></td>
+        <td th:text="${seat.available}"></td>
+        <td><a th:href="@{'/seats/' + ${seat.id}}">Details</a></td>
+    </tr>
+</table>
+<p th:if="${seats.isEmpty()}">This hall has no seats.</p>
+<h3>Screenings</h3>
+
+<table border = "2" th:if="${!screenings.isEmpty()}">
+    <tr>
+        <th>id</th>
+        <th>hallId</th>
+        <th>movieId</th>
+        <th>date</th>
+        <th>details</th>
+    </tr>
+    <tr th:each="screening: ${screenings}">
+        <td th:text="${screening.id}"></td>
+        <td th:text="${screening.hallId}"></td>
+        <td th:text="${screening.movieId}"></td>
+        <td th:text="${screening.date}"></td>
+        <td>
+            <a th:href="@{'/screenings/' + ${screening.id}}">Details</a>
+        </td>
+    </tr>
+</table>
+<p th:if="${screenings.isEmpty()}">This hall has no screenings.</p>
+</body>
+</html>

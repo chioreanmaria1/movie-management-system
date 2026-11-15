@@ -1,7 +1,8 @@
 package com.example.moviemanagement.service;
 
 import com.example.moviemanagement.model.*;
-import com.example.moviemanagement.repository.BaseRepository;
+import com.example.moviemanagement.repository.*;
+import com.example.moviemanagement.repository.memory.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,14 +14,14 @@ import java.util.List;
 @Service
 public class CinemaService {
     private final BaseRepository<Theatre> theatreRepository;
-    private final BaseRepository<Hall> hallRepository;
-    private final BaseRepository<Seat> seatRepository;
-    private final BaseRepository<Movie> movieRepository;
-    private final BaseRepository<Screening> screeningRepository;
-    private final BaseRepository<StaffAssignment> staffAssignmentRepository;
-    private final BaseRepository<Ticket> ticketRepository;
+    private final HallRepository hallRepository;
+    private final SeatRepository seatRepository;
+    private final MovieRepository movieRepository;
+    private final ScreeningRepository screeningRepository;
+    private final StaffAssignmentRepository staffAssignmentRepository;
+    private final TicketRepository ticketRepository;
 
-    public CinemaService(BaseRepository<Theatre> theatreRepository, BaseRepository<Hall> hallRepository, BaseRepository<Seat> seatRepository, BaseRepository<Movie> movieRepository, BaseRepository<Screening> screeningRepository, BaseRepository<StaffAssignment> staffAssignmentRepository, BaseRepository<Ticket> ticketRepository) {
+    public CinemaService(BaseRepository<Theatre> theatreRepository, HallRepository hallRepository, SeatRepository seatRepository, MovieRepository movieRepository, ScreeningRepository screeningRepository, StaffAssignmentRepository staffAssignmentRepository, TicketRepository ticketRepository) {
         this.theatreRepository = theatreRepository;
         this.hallRepository = hallRepository;
         this.seatRepository = seatRepository;

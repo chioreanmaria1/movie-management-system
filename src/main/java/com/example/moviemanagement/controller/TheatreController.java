@@ -42,9 +42,6 @@ public class TheatreController {
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable String id, Model model){
         Theatre theatre = service.findTheatreById(id);
-        if(theatre == null){
-            return "redirect:/theatres";
-        }
         model.addAttribute("theatre", theatre);
         return "theatre/edit";
     }
@@ -59,9 +56,6 @@ public class TheatreController {
     @GetMapping("/{id}")
     public String details(@PathVariable String id, Model model){
         Theatre theatre = service.findTheatreById(id);
-        if(theatre == null){
-            return "redirect:/theatres";
-        }
         model.addAttribute("theatre", theatre);
         model.addAttribute("halls", service.findHallsByTheatreId(id));
         return "theatre/details";
