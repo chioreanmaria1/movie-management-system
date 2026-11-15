@@ -4,4 +4,10 @@
   "city" : "Cluj-Napoca",
   "available" : true,
   "halls" : [ ]
+}, {
+  "id" : "967552b7-606e-4530-93ba-034d196d5601",
+  "name" : "Ankora",
+  "city" : "Satu Mare",
+  "available" : true,
+  "halls" : [ ]
 } ]

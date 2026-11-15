@@ -49,6 +49,9 @@ public class BookingService {
         if (!(seat.getHallId().equals(screening.getHallId()))){
             throw new IllegalArgumentException("Seat doesn't belong to this hall!");
         }
+        if(ticket.getPrice() <= 0){
+            throw new IllegalArgumentException("Ticket can't have a negative or no value");
+        }
 
         ticketRepository.save(ticket);
     }

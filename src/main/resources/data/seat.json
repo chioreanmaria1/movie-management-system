@@ -4,4 +4,10 @@
   "row" : "1",
   "column" : "2",
   "available" : true
+}, {
+  "id" : "650710cd-8bf7-434c-bf88-8cd4e0988aa7",
+  "hallId" : "75a3f232-360d-4a48-b3c3-9eab00750052",
+  "row" : "2",
+  "column" : "2",
+  "available" : true
 } ]

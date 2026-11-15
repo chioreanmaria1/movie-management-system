@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 @Service
@@ -45,11 +46,26 @@ public class CinemaService {
         return startScreening1.isBefore(endScreening2) && startScreening2.isBefore(endScreening1);
     }
 
-    public void saveTheatre(Theatre theatre){theatreRepository.save(theatre);}
+    public void saveTheatre(Theatre theatre){
+        if (theatre.getName().trim().isEmpty() || theatre.getName() == null){
+            throw new IllegalArgumentException("Theatre must have a name!");
+        }
+        if (theatre.getCity().trim().isEmpty() || theatre.getCity() == null){
+            throw new IllegalArgumentException("There must have a city!");
+        }
+        theatreRepository.save(theatre);
+    }
 
     public void saveHall(Hall hall){
         if(theatreRepository.findById(hall.getTheatreId())==null || !(theatreRepository.findById(hall.getTheatreId()).isAvailable())){
             throw new IllegalArgumentException("Hall cannot be added because the theatre with id "+hall.getTheatreId()+" does not exist!");
+        }
+        if(hall.getName().isEmpty() || hall.getName()==null){
+            throw new IllegalArgumentException("Hall must have a name!");
+        }
+
+        if (hall.getCapacity() <= 0){
+            throw new IllegalArgumentException("Hall can't have negative or no capacity!");
         }
         hallRepository.save(hall);
     }
@@ -62,6 +78,13 @@ public class CinemaService {
     }
 
     public void saveMovie(Movie movie){
+        if (movie.getTitle().trim().isEmpty() || movie.getTitle() == null){
+            throw new IllegalArgumentException("Movie must have a name!");
+        }
+        if (movie.getDurationMin() <= 0){
+            throw new IllegalArgumentException("Duration can't be negative or zero!");
+        }
+
         movieRepository.save(movie);
     }
 

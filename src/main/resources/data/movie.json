@@ -5,4 +5,11 @@
   "ageRestricted" : true,
   "durationMin" : 150,
   "screenings" : [ ]
+}, {
+  "id" : "4027f075-8471-4cef-8722-428e51ab74ad",
+  "title" : "Harry Potter",
+  "genre" : "ACTION",
+  "ageRestricted" : true,
+  "durationMin" : 150,
+  "screenings" : [ ]
 } ]

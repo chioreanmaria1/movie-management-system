@@ -6,4 +6,12 @@
   "available" : true,
   "screenings" : [ ],
   "seats" : [ ]
+}, {
+  "id" : "765ea1e8-3ecf-4a48-96e4-fb3e3054c5cb",
+  "name" : "hall2",
+  "theatreId" : "dc819960-5e7f-43ff-9e3e-3a9123b67c4d",
+  "capacity" : 1,
+  "available" : true,
+  "screenings" : [ ],
+  "seats" : [ ]
 } ]
