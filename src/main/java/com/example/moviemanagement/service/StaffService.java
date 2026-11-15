@@ -1,10 +1,7 @@
 package com.example.moviemanagement.service;
 
 import com.example.moviemanagement.model.*;
-import com.example.moviemanagement.repository.memory.ScreeningRepository;
-import com.example.moviemanagement.repository.memory.StaffAssignmentRepository;
-import com.example.moviemanagement.repository.memory.SupportStaffRepository;
-import com.example.moviemanagement.repository.memory.TechnicalOperatorRepository;
+import com.example.moviemanagement.repository.BaseRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,12 +9,12 @@ import java.util.List;
 
 @Service
 public class StaffService {
-    public final SupportStaffRepository supportStaffRepository;
-    public final TechnicalOperatorRepository technicalOperatorRepository;
-    public final StaffAssignmentRepository staffAssignmentRepository;
-    public final ScreeningRepository screeningRepository;
+    public final BaseRepository<Staff> supportStaffRepository;
+    public final BaseRepository<Staff> technicalOperatorRepository;
+    public final BaseRepository<StaffAssignment> staffAssignmentRepository;
+    public final BaseRepository<Screening> screeningRepository;
 
-    public StaffService(SupportStaffRepository supportStaffRepository, TechnicalOperatorRepository technicalOperatorRepository, StaffAssignmentRepository staffAssignmentRepository, ScreeningRepository screeningRepository) {
+    public StaffService(BaseRepository<Staff> supportStaffRepository, BaseRepository<Staff> technicalOperatorRepository, BaseRepository<StaffAssignment> staffAssignmentRepository, BaseRepository<Screening> screeningRepository) {
         this.supportStaffRepository = supportStaffRepository;
         this.technicalOperatorRepository = technicalOperatorRepository;
         this.staffAssignmentRepository = staffAssignmentRepository;
