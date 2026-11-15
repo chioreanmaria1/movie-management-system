@@ -48,7 +48,7 @@ public class HallController {
     }
 
     @PostMapping("/{id}/edit")
-    public String updateHall(@PathVariable String id, @ModelAttribute Hall hall){
+    public String updateHalls(@PathVariable String id, @ModelAttribute Hall hall){
         Hall originalHall = service.findHallById(id);
         hall.setId(id);
         hall.setTheatreId(originalHall.getTheatreId());

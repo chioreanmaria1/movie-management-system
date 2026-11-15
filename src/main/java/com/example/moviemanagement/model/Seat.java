@@ -9,12 +9,12 @@ public class Seat implements HasId {
     private String column;
     private boolean isAvailable;
 
-    public Seat(String id, String hallId, String row, String column, boolean isAvailable) {
+    public Seat(String id, String hallId, String row, String column, boolean available) {
         this.id = id;
         this.hallId = hallId;
         this.row = row;
         this.column = column;
-        this.isAvailable = isAvailable;
+        this.isAvailable = available;
     }
 
     public Seat(){

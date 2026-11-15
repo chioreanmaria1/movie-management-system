@@ -15,13 +15,13 @@ import java.util.List;
 public class CinemaService {
     private final BaseRepository<Theatre> theatreRepository;
     private final BaseRepository<Hall> hallRepository;
-    private final SeatRepository seatRepository;
+    private final BaseRepository<Seat> seatRepository;
     private final MovieRepository movieRepository;
     private final ScreeningRepository screeningRepository;
     private final StaffAssignmentRepository staffAssignmentRepository;
     private final TicketRepository ticketRepository;
 
-    public CinemaService(BaseRepository<Theatre> theatreRepository, BaseRepository<Hall> hallRepository, SeatRepository seatRepository, MovieRepository movieRepository, ScreeningRepository screeningRepository, StaffAssignmentRepository staffAssignmentRepository, TicketRepository ticketRepository) {
+    public CinemaService(BaseRepository<Theatre> theatreRepository, BaseRepository<Hall> hallRepository, BaseRepository<Seat> seatRepository, MovieRepository movieRepository, ScreeningRepository screeningRepository, StaffAssignmentRepository staffAssignmentRepository, TicketRepository ticketRepository) {
         this.theatreRepository = theatreRepository;
         this.hallRepository = hallRepository;
         this.seatRepository = seatRepository;

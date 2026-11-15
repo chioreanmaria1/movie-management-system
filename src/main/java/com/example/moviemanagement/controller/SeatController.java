@@ -38,4 +38,27 @@ public class SeatController {
         service.deleteSeat(id);
         return "redirect:/seats";
     }
+
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable String id, Model model){
+        Seat seat = service.findSeatById(id);
+        model.addAttribute("seat", seat);
+        return "seat/edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String updateSeats(@PathVariable String id, @ModelAttribute Seat seat){
+        Seat originalSeat = service.findSeatById(id);
+        seat.setId(id);
+        seat.setHallId(originalSeat.getHallId());
+        service.saveSeat(seat);
+        return "redirect:/seats";
+    }
+
+    @GetMapping("/{id}")
+    public String details(@PathVariable String id, Model model){
+        Seat seat = service.findSeatById(id);
+        model.addAttribute("seat", seat);
+        return "seat/details";
+    }
 }
