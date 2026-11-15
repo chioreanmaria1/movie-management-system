@@ -14,6 +14,9 @@
         <th>id</th>
         <th>screeningId</th>
         <th>staffId</th>
+        <th>delete item</th>
+        <th>edit item</th>
+        <th>details</th>
     </tr>
     <tr th:each="item: ${staffAssignments}">
         <td th:text="${item.id}"> </td>
@@ -23,6 +26,12 @@
             <form th:action="@{'/staffassignments/'+${item.id}+'/delete'}" method="post">
                 <button type="submit">Delete</button>
             </form>
+        </td>
+        <td>
+            <a th:href="@{'/staffassignments/' + ${item.id} + '/edit'}">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{'/staffassignments/' + ${item.id}}">Details</a>
         </td>
     </tr>
 </table>

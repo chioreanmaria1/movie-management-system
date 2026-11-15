@@ -2,7 +2,6 @@ package com.example.moviemanagement.service;
 
 import com.example.moviemanagement.model.*;
 import com.example.moviemanagement.repository.BaseRepository;
-import com.example.moviemanagement.repository.memory.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,14 +9,14 @@ import java.util.List;
 
 @Service
 public class BookingService {
-    private final CustomerRepository customerRepository;
-    private final TicketRepository ticketRepository;
-    private final ScreeningRepository screeningRepository;
+    private final BaseRepository<Customer> customerRepository;
+    private final BaseRepository<Ticket> ticketRepository;
+    private final BaseRepository<Screening> screeningRepository;
     private final BaseRepository<Seat> seatRepository;
-    private final MovieRepository movieRepository;
+    private final BaseRepository<Movie> movieRepository;
 
 
-    public BookingService(CustomerRepository customerRepository, TicketRepository ticketRepository, ScreeningRepository screeningRepository, BaseRepository<Seat> seatRepository, MovieRepository movieRepository) {
+    public BookingService(BaseRepository<Customer> customerRepository, BaseRepository<Ticket> ticketRepository, BaseRepository<Screening> screeningRepository, BaseRepository<Seat> seatRepository, BaseRepository<Movie> movieRepository) {
         this.customerRepository = customerRepository;
         this.ticketRepository = ticketRepository;
         this.screeningRepository = screeningRepository;
@@ -43,7 +42,7 @@ public class BookingService {
             throw  new IllegalArgumentException("Customer is underaged and can't but this ticket");
         }
         for (Ticket ticket1: screeningTickets){
-            if (ticket1.getSeatId().equals(ticket.getSeatId())){
+            if (!ticket1.getId().equals(ticket.getId()) && ticket1.getSeatId().equals(ticket.getSeatId())){
                 throw new IllegalArgumentException("Can't book a ticket for a seat that is already taken!");
             }
         }
@@ -70,6 +69,9 @@ public class BookingService {
     }
 
     public Ticket findTicketById(String id){
+        if (ticketRepository.findById(id) == null){
+            throw new IllegalArgumentException("Ticket with the id" + id + "not found!");
+        }
         return ticketRepository.findById(id);
     }
 

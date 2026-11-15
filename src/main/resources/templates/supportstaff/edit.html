@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit support staff</title>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+<h1>Edit support staff </h1>
+<form th:action="@{'/supportstaff/'+${supportStaff.id}+'/edit'}" th:object="${supportStaff}" method="post">
+    id: <input type="text" th:field="*{id}" readonly> <br>
+    name: <input type="text" th:field="*{name}"> <br>
+    role: <select th:field="*{role}">
+    <option th:each="roleItem: ${roles}" th:value="${roleItem}" th:text="${roleItem}"></option>
+</select> <br>
+    <button type = "submit">Save changes</button>
+</form>
+</body>
+</html>

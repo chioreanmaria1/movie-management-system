@@ -40,4 +40,25 @@ public class TechnicalOperatorController {
         staffService.deleteStaff(id);
         return "redirect:/technicaloperators";
     }
+
+    @GetMapping("/{id}")
+    public String details(Model model, @PathVariable String id){
+        model.addAttribute("technicalOperator", staffService.findStaffById(id));
+        return "technicaloperator/details";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable String id){
+        model.addAttribute("technicalOperator", staffService.findStaffById(id));
+        model.addAttribute("specializations", Specialization.values());
+        return "technicaloperator/edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String updateTechnicalOperator(@PathVariable String id, @ModelAttribute TechnicalOperator technicalOperator){
+        technicalOperator.setId(id);
+        staffService.saveStaff(technicalOperator);
+        return "redirect:/technicaloperators";
+    }
+
 }

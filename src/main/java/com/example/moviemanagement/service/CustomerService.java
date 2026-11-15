@@ -1,8 +1,7 @@
 package com.example.moviemanagement.service;
 import com.example.moviemanagement.model.Customer;
 import com.example.moviemanagement.model.Ticket;
-import com.example.moviemanagement.repository.memory.CustomerRepository;
-import com.example.moviemanagement.repository.memory.TicketRepository;
+import com.example.moviemanagement.repository.BaseRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,10 +9,10 @@ import java.util.List;
 
 @Service
 public class CustomerService {
-    private final CustomerRepository customerRepository;
-    private final TicketRepository ticketRepository;
+    private final BaseRepository<Customer> customerRepository;
+    private final BaseRepository<Ticket> ticketRepository;
 
-    public CustomerService(CustomerRepository customerRepository, TicketRepository ticketRepository) {
+    public CustomerService(BaseRepository<Customer> customerRepository, BaseRepository<Ticket> ticketRepository) {
         this.customerRepository = customerRepository;
         this.ticketRepository = ticketRepository;
     }

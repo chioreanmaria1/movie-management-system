@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Technical Operator Details</title>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<h1>Technical Operator Details</h1>
+<p> id: <span th:text="${technicalOperator.id}"></span></p>
+<p>name: <span th:text="${technicalOperator.name}"></span></p>
+<p>specialization: <span th:text="${technicalOperator.specialization}"></span></p>
+</body>
+</html>

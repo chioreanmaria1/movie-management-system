@@ -33,9 +33,28 @@ public class StaffAssignmentController {
         return "redirect:/staffassignments";
     }
 
-    @PostMapping("{id}/delete")
+    @PostMapping("/{id}/delete")
     public String deleteStaffAssignment(@PathVariable String id){
         staffService.deleteStaffAssignment(id);
+        return "redirect:/staffassignments";
+    }
+
+    @GetMapping("/{id}")
+    public String details(Model model, @PathVariable String id){
+        model.addAttribute("staffAssignment", staffService.findStaffAssignmentById(id));
+        return "staffassignment/details";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable String id){
+        model.addAttribute("staffAssignment", staffService.findStaffAssignmentById(id));
+        return "staffassignment/edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String updateStaffAssignment(@PathVariable String id, @ModelAttribute StaffAssignment staffAssignment){
+        staffAssignment.setId(id);
+        staffService.saveStaffAssignment(staffAssignment);
         return "redirect:/staffassignments";
     }
 }

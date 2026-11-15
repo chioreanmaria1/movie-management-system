@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Assignment details</title>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<h1>Staff Assignment details</h1>
+<p>id: <span th:text="${staffAssignment.id}"></span></p>
+<p>screeningId: <span th:text="${staffAssignment.screeningId}"></span></p>
+<p>staffId: <span th:text="${staffAssignment.staffId}"></span></p>
+</body>
+</html>
