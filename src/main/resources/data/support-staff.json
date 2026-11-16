@@ -6,4 +6,36 @@
   "id" : "251f38e0-4e0a-4f77-86a5-341f83c28437",
   "name" : "Arabela Manole",
   "role" : "CLEANING"
+}, {
+  "id" : "4b62657c-5dd1-47ef-821e-8780e6c9401a",
+  "name" : "Moldovan Anda",
+  "role" : "CLEANING"
+}, {
+  "id" : "8049405b-0d3b-4b97-8125-201478fb74d5",
+  "name" : "Moldovan Darius",
+  "role" : "CLEANING"
+}, {
+  "id" : "c743cd90-cba2-4216-8e4f-a405a4aca74d",
+  "name" : "Hanna Dalos",
+  "role" : "CLEANING"
+}, {
+  "id" : "e0ee7cb0-f503-432d-b55b-dbb1dc10329e",
+  "name" : "Cismas Darra",
+  "role" : "CLEANING"
+}, {
+  "id" : "89c4dac9-8576-4bd2-8994-74fc444fbd6c",
+  "name" : "Radu Chiorean",
+  "role" : "SECURITY"
+}, {
+  "id" : "fe0503e8-3435-41df-b816-32fd9a1a5fca",
+  "name" : "Câmpean Alexandru",
+  "role" : "SECURITY"
+}, {
+  "id" : "961e4f7c-7aa6-4f96-af60-6594be82458b",
+  "name" : "Varga Aron",
+  "role" : "USHER"
+}, {
+  "id" : "575233e0-9b55-4ab8-befd-b17f892778e3",
+  "name" : "Koch Mate",
+  "role" : "USHER"
 } ]

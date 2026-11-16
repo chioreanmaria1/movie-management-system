@@ -42,6 +42,7 @@ public class CustomerController {
     @GetMapping("/{id}")
     public String details(Model model, @PathVariable String id){
         model.addAttribute("customer", customerService.findCustomerById(id));
+        model.addAttribute("tickets", customerService.findTicketsByCustomerId(id));
         return "customer/details";
     }
 

@@ -9,7 +9,6 @@
 
 <p> New ticket </p>
 <form th:action="@{/tickets}" th:object="${ticket}" method="post">
-    id: <input type="text" th:field="*{id}"> <br>
     screeningId: <input type="text" th:field="*{screeningId}"> <br>
     customerId: <input type="text" th:field="*{customerId}"> <br>
     seatId: <input type="text" th:field="*{seatId}"> <br>

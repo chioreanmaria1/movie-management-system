@@ -11,5 +11,24 @@
 <p>id: <span th:text="${customer.id}"></span></p>
 <p>name: <span th:text="${customer.name}"></span></p>
 <p>birthDate: <span th:text="${customer.birthDate}"></span></p>
+
+<h2>Tickets</h2>
+<table border="2" th:if="${tickets != null and !tickets.isEmpty()}">
+    <tr>
+        <th>id</th>
+        <th>screeningId</th>
+        <th>seatId</th>
+        <th>price</th>
+        <th>details</th>
+    </tr>
+    <tr th:each="ticket : ${tickets}">
+        <td th:text="${ticket.id}"></td>
+        <td th:text="${ticket.screeningId}"></td>
+        <td th:text="${ticket.seatId}"></td>
+        <td th:text="${ticket.price}"></td>
+        <td><a th:href="@{'/tickets/' + ${ticket.id}}">Details</a></td>
+    </tr>
+</table>
+<p th:if="${tickets == null or tickets.isEmpty()}">This customer has no tickets.</p>
 </body>
 </html>
