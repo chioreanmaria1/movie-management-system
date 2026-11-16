@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Technical Operator</title>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+<h1>Edit Technical Operator </h1>
+<form th:action="@{'/technicaloperators/'+${technicalOperator.id}+'/edit'}" th:object="${technicalOperator}" method="post">
+    id: <input type="text" th:field="*{id}" readonly> <br>
+    name: <input type="text" th:field="*{name}"> <br>
+    specialization: <select th:field="*{specialization}">
+    <option th:each="specializationItem: ${specializations}" th:value="${specializationItem}" th:text="${specializationItem}"></option>
+</select> <br>
+    <button type = "submit">Save changes</button>
+</form>
+</body>
+</html>

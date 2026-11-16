@@ -9,7 +9,6 @@
 
 <h1>New movie</h1>
 <form th:action="@{/movies}" th:object="${movie}" method="post">
-    id: <input type="text" th:field="*{id}"> <br>
     title: <input type="text" th:field="*{title}"> <br>
     genre: <select th:field="*{genre}">
             <option th:each="genreItem: ${genres}" th:value="${genreItem}" th:text="${genreItem}"></option>

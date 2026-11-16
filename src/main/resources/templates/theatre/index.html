@@ -19,6 +19,8 @@
         <th>city</th>
         <th>available</th>
         <th>delete item</th>
+        <th>edit item</th>
+        <th>details</th>
     </tr>
     <tr th:each="item: ${theatres}">
         <td th:text="${item.id}">T1</td>
@@ -30,6 +32,12 @@
                 <button type="submit">Delete</button>
             </form>
 
+        </td>
+        <td>
+            <a th:href="@{'/theatres/' + ${item.id} + '/edit'}">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{'/theatres/' + ${item.id}}">Details</a>
         </td>
     </tr>
 </table>

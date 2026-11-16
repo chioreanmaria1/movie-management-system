@@ -16,6 +16,9 @@
         <th>customerId</th>
         <th>seatId</th>
         <th>price</th>
+        <th>delete item</th>
+        <th>edit item</th>
+        <th>details</th>
     </tr>
     <tr th:each="item: ${tickets}">
         <td th:text="${item.id}"> </td>
@@ -28,6 +31,13 @@
                 <button type="submit">Delete</button>
             </form>
         </td>
+        <td>
+            <a th:href="@{'/tickets/' + ${item.id} + '/edit'}">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{'/tickets/' + ${item.id}}">Details</a>
+        </td>
+    </tr>
 </table>
 </body>
 </html>

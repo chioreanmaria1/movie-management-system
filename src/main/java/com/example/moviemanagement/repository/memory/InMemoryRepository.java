@@ -1,4 +1,7 @@
-package com.example.moviemanagement.repository;
+package com.example.moviemanagement.repository.memory;
+
+import com.example.moviemanagement.repository.BaseRepository;
+import com.example.moviemanagement.repository.HasId;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -6,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-public abstract class InMemoryRepository<T extends HasId> implements BaseRepository<T>{
+public abstract class InMemoryRepository<T extends HasId> implements BaseRepository<T> {
 
     LinkedHashMap<String, T> objects;
 

@@ -1,7 +1,7 @@
 package com.example.moviemanagement.service;
 import com.example.moviemanagement.model.Customer;
-import com.example.moviemanagement.repository.CustomerRepository;
-import com.example.moviemanagement.repository.TicketRepository;
+import com.example.moviemanagement.model.Ticket;
+import com.example.moviemanagement.repository.BaseRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,17 +9,20 @@ import java.util.List;
 
 @Service
 public class CustomerService {
-    private final CustomerRepository customerRepository;
-    private final TicketRepository ticketRepository;
+    private final BaseRepository<Customer> customerRepository;
+    private final BaseRepository<Ticket> ticketRepository;
 
-    public CustomerService(CustomerRepository customerRepository, TicketRepository ticketRepository) {
+    public CustomerService(BaseRepository<Customer> customerRepository, BaseRepository<Ticket> ticketRepository) {
         this.customerRepository = customerRepository;
         this.ticketRepository = ticketRepository;
     }
 
     public void saveCustomer(Customer customer){
-        if(customer.getName() == null ){
+        if(customer.getName() == null || customer.getName().trim().isEmpty()){
             throw new IllegalArgumentException("Customer's name cannot be empty!");
+        }
+        if (customer.getBirthDate() == null){
+            throw new IllegalArgumentException("Customer has to insert a date!");
         }
         customerRepository.save(customer);
     }
@@ -32,18 +35,28 @@ public class CustomerService {
         return customerRepository.findById(id);
     }
 
+    public List<Ticket> findTicketsByCustomerId(String customerId){
+        List<Ticket> result = new ArrayList<>();
+        for(Ticket ticket: ticketRepository.findAll()){
+            if(ticket.getCustomerId().equals(customerId)){
+                result.add(ticket);
+            }
+        }
+        return result;
+    }
+
     public void deleteCustomer(String id){
         if(findCustomerById(id) == null){
             throw new IllegalArgumentException("You can't delete a customer that does not exist!");
         }
-        if(!ticketRepository.findByCustomerId(id).isEmpty()){
+        if(!findTicketsByCustomerId(id).isEmpty()){
             throw new IllegalArgumentException("You can't delete customer with id "+id+" because it has tickets");
         }
         customerRepository.delete(id);
     }
 
     public int ticketsOfCustomer(String customerId){
-        return ticketRepository.findByCustomerId(customerId).size();
+        return findTicketsByCustomerId(customerId).size();
     }
 
     public List<Customer> findCustomersWithMinTickets(int minimum){

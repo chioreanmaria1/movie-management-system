@@ -40,4 +40,24 @@ public class SupportStaffController {
         staffService.deleteStaff(id);
         return "redirect:/supportstaff";
     }
+
+    @GetMapping("/{id}")
+    public String details(Model model, @PathVariable String id){
+        model.addAttribute("supportStaff", staffService.findStaffById(id));
+        return "supportstaff/details";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable String id){
+        model.addAttribute("supportStaff", staffService.findStaffById(id));
+        model.addAttribute("roles", Role.values());
+        return "supportstaff/edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String updateSupportStaff(@PathVariable String id, @ModelAttribute SupportStaff supportStaff){
+        supportStaff.setId(id);
+        staffService.saveStaff(supportStaff);
+        return "redirect:/supportstaff";
+    }
 }

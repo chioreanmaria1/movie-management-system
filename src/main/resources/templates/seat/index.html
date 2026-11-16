@@ -17,6 +17,8 @@
         <th>column</th>
         <th>available</th>
         <th>delete</th>
+        <th>edit item</th>
+        <th>details</th>
     </tr>
     <tr th:each="seat: ${seats}" >
     <td th:text="${seat.id}"></td>
@@ -28,6 +30,12 @@
         <form th:action="@{'/seats/'+${seat.id}+'/delete'}" method="post">
             <button type="submit">Delete</button>
         </form>
+    </td>
+    <td>
+        <a th:href="@{'/seats/'+${seat.id}+'/edit'}">Edit</a>
+    </td>
+    <td>
+        <a th:href="@{'/seats/'+${seat.id}}">Details</a>
     </td>
     </tr>
 </table>

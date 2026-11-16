@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Screening</title>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+<h1>Edit Screening</h1>
+<form th:action="@{'/screenings/'+${screening.id}+'/edit'}" th:object="${screening}" method="post">
+    id: <span th:text="${screening.id}"></span> <br>
+    hallId: <span th:text="${screening.hallId}"></span> <br>
+    movieId: <span th:text="${screening.movieId}"></span> <br>
+    date: <input type="datetime-local" th:field="*{date}"><br>
+    <button type="submit">Save changes</button>
+</form>
+</body>
+</html>

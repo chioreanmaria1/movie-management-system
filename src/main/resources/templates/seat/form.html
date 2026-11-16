@@ -9,10 +9,15 @@
 
 <h1>New seat</h1>
 <form th:action="@{/seats}" th:object="${seat}" method="post">
-    id: <input type="text" th:field="*{id}"><br>
     hallId: <input type="text" th:field="*{hallId}"><br>
-    row: <input type="text" th:field="*{row}"> <br>
-    column: <input type="text" th:field="*{column}"> <br>
+    row:
+    <select th:field="*{row}">
+        <option th:each="rowItem : ${rows}" th:value="${rowItem}" th:text="${rowItem}"></option>
+    </select> <br>
+    column:
+    <select th:field="*{column}">
+        <option th:each="columnItem : ${columns}" th:value="${columnItem}" th:text="${columnItem}"></option>
+    </select> <br>
     available: <input type="checkbox" th:field="*{available}"> <br>
     <button type="submit">Save new seat</button>
 </form>

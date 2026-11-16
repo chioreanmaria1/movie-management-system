@@ -9,9 +9,9 @@
 
 <p> New Customer </p>
 <form th:action="@{/customers}" th:object="${customer}" method="post">
-    id: <input type="text" th:field="*{id}"> <br>
+   
     name: <input type="text" th:field="*{name}"> <br>
-    birthDate: <input type="date" th:field="*{birthDate}"><br>
+    birthDate: <input type="date" th:field="*{birthDate}" required/><br>
     <button type="submit">Save new customer</button>
 
 </form>

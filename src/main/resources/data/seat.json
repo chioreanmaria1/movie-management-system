@@ -1,0 +1,61 @@
+[ {
+  "id" : "5488995e-8836-43c0-90e3-919af0a5b191",
+  "hallId" : "75a3f232-360d-4a48-b3c3-9eab00750052",
+  "row" : "J",
+  "column" : "5",
+  "available" : true
+}, {
+  "id" : "3942e855-9e44-4bfc-9ee8-5b03f7ec7a75",
+  "hallId" : "75a3f232-360d-4a48-b3c3-9eab00750052",
+  "row" : "A",
+  "column" : "1",
+  "available" : true
+}, {
+  "id" : "75655477-145b-4966-b139-575f8bb9a4dc",
+  "hallId" : "75a3f232-360d-4a48-b3c3-9eab00750052",
+  "row" : "A",
+  "column" : "2",
+  "available" : true
+}, {
+  "id" : "7b682e4e-e347-493b-904d-3c5570c68b33",
+  "hallId" : "75a3f232-360d-4a48-b3c3-9eab00750052",
+  "row" : "A",
+  "column" : "3",
+  "available" : true
+}, {
+  "id" : "7e614da9-f2ee-4dbc-ab97-086deaed8476",
+  "hallId" : "75a3f232-360d-4a48-b3c3-9eab00750052",
+  "row" : "A",
+  "column" : "4",
+  "available" : true
+}, {
+  "id" : "e21bca16-4b67-48df-9992-dbd6f2b4be75",
+  "hallId" : "75a3f232-360d-4a48-b3c3-9eab00750052",
+  "row" : "A",
+  "column" : "5",
+  "available" : true
+}, {
+  "id" : "d461f6b5-9ed4-426c-8341-88f7601b3307",
+  "hallId" : "75a3f232-360d-4a48-b3c3-9eab00750052",
+  "row" : "A",
+  "column" : "6",
+  "available" : true
+}, {
+  "id" : "581417fb-5f5c-469e-b4bf-de485ba6cd19",
+  "hallId" : "75a3f232-360d-4a48-b3c3-9eab00750052",
+  "row" : "A",
+  "column" : "7",
+  "available" : true
+}, {
+  "id" : "9903b0ed-7dea-4447-a6d1-4653f1247585",
+  "hallId" : "75a3f232-360d-4a48-b3c3-9eab00750052",
+  "row" : "A",
+  "column" : "8",
+  "available" : true
+}, {
+  "id" : "b459a5d8-1bfa-46c4-80cc-bb107a8fab5a",
+  "hallId" : "75a3f232-360d-4a48-b3c3-9eab00750052",
+  "row" : "A",
+  "column" : "9",
+  "available" : true
+} ]

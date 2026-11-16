@@ -12,15 +12,16 @@ public class Theatre implements HasId {
     private boolean isAvailable;
     private List<Hall> halls;
 
-    public Theatre(String id, String name, String city, boolean isAvailable) {
+    public Theatre(String id, String name, String city, boolean available) {
         this.id = id;
         this.name = name;
         this.city = city;
-        this.isAvailable = isAvailable;
+        this.isAvailable = available;
         this.halls = new ArrayList<>();
     }
 
     public Theatre(){
+        this.isAvailable = true;
         this.halls = new ArrayList<>();
     }
 

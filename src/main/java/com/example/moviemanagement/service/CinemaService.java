@@ -2,6 +2,7 @@ package com.example.moviemanagement.service;
 
 import com.example.moviemanagement.model.*;
 import com.example.moviemanagement.repository.*;
+import com.example.moviemanagement.repository.memory.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -12,15 +13,18 @@ import java.util.List;
 
 @Service
 public class CinemaService {
-    private final TheatreRepository theatreRepository;
-    private final HallRepository hallRepository;
-    private final SeatRepository seatRepository;
-    private final MovieRepository movieRepository;
-    private final ScreeningRepository screeningRepository;
-    private final StaffAssignmentRepository staffAssignmentRepository;
-    private final TicketRepository ticketRepository;
+    private final BaseRepository<Theatre> theatreRepository;
+    private final BaseRepository<Hall> hallRepository;
+    private final BaseRepository<Seat> seatRepository;
+    private final BaseRepository<Movie> movieRepository;
+    private final BaseRepository<Screening> screeningRepository;
+    private final BaseRepository<StaffAssignment> staffAssignmentRepository;
+    private final BaseRepository<Ticket> ticketRepository;
 
-    public CinemaService(TheatreRepository theatreRepository, HallRepository hallRepository, SeatRepository seatRepository, MovieRepository movieRepository, ScreeningRepository screeningRepository, StaffAssignmentRepository staffAssignmentRepository, TicketRepository ticketRepository) {
+    public static final List<String> seatRows = new ArrayList<>();  //listele apartin clasei (static)
+    public static final List<String> seatColumns = new ArrayList<>();
+
+    public CinemaService(BaseRepository<Theatre> theatreRepository, BaseRepository<Hall> hallRepository, BaseRepository<Seat> seatRepository, BaseRepository<Movie> movieRepository, BaseRepository<Screening> screeningRepository, BaseRepository<StaffAssignment> staffAssignmentRepository, BaseRepository<Ticket> ticketRepository) {
         this.theatreRepository = theatreRepository;
         this.hallRepository = hallRepository;
         this.seatRepository = seatRepository;
@@ -28,6 +32,28 @@ public class CinemaService {
         this.screeningRepository = screeningRepository;
         this.staffAssignmentRepository = staffAssignmentRepository;
         this.ticketRepository = ticketRepository;
+    }
+
+    //we create the list of rows and columns
+    static{
+        for(char character = 'A'; character<='T'; character++){
+            seatRows.add(String.valueOf(character));
+        }
+        for(int i = 1; i<=20; i++){
+            seatColumns.add(String.valueOf(i));
+        }
+    }
+
+    public static int maxHallCapacity(){  //the maximum capacity of any hall
+        return seatRows.size()*seatColumns.size();
+    }
+
+    public List<String> getSeatRows(){
+        return seatRows;
+    }
+
+    public List<String> getSeatColumns(){
+        return seatColumns;
     }
 
     private boolean datesOverlap(Screening screening1, Screening screening2){
@@ -44,23 +70,71 @@ public class CinemaService {
         return startScreening1.isBefore(endScreening2) && startScreening2.isBefore(endScreening1);
     }
 
-    public void saveTheatre(Theatre theatre){theatreRepository.save(theatre);}
+    public void saveTheatre(Theatre theatre){
+        if (theatre.getName().trim().isEmpty() || theatre.getName() == null){
+            throw new IllegalArgumentException("Theatre must have a name!");
+        }
+        if (theatre.getCity().trim().isEmpty() || theatre.getCity() == null){
+            throw new IllegalArgumentException("There must have a city!");
+        }
+        theatreRepository.save(theatre);
+    }
 
     public void saveHall(Hall hall){
         if(theatreRepository.findById(hall.getTheatreId())==null || !(theatreRepository.findById(hall.getTheatreId()).isAvailable())){
             throw new IllegalArgumentException("Hall cannot be added because the theatre with id "+hall.getTheatreId()+" does not exist!");
         }
+        if(hall.getName().isEmpty() || hall.getName()==null){
+            throw new IllegalArgumentException("Hall must have a name!");
+        }
+        int hallCapacity = hall.getCapacity();
+        if (hallCapacity<= 0 || hallCapacity > maxHallCapacity()){  //we need to see if the capacity of the hall we want to add is > than the max capacity
+            throw new IllegalArgumentException("Hall can't have a capacity <= 0 or greater than the maximum one!");
+        }
         hallRepository.save(hall);
     }
 
     public void saveSeat(Seat seat){
-        if(hallRepository.findById(seat.getHallId())==null || !(hallRepository.findById(seat.getHallId()).isAvailable())){
+        Hall hall = hallRepository.findById(seat.getHallId());
+        if(hall == null || !hall.isAvailable()){
             throw new IllegalArgumentException("Seat cannot be added because the hall with id "+seat.getHallId()+" does not exist!");
+        }
+
+        if(seat.getRow() == null || !seatRows.contains(seat.getRow().trim().toUpperCase())){
+            throw new IllegalArgumentException("Row of the seat must be a letter between A and T!");
+        }
+        if(seat.getColumn() == null || !seatColumns.contains(seat.getColumn().trim())){
+            throw new IllegalArgumentException("Column of the seat must be a number between 1 and 20");
+        }
+        seat.setRow(seat.getRow().trim().toUpperCase());
+        seat.setColumn(seat.getColumn().trim());
+
+        List<Seat> seats = findSeatsByHallId(seat.getHallId());   //seeing if the seat we want to add already exists (the row and column)
+        for(Seat otherSeat: seats){
+            if(!otherSeat.getId().equals(seat.getId()) && otherSeat.getRow().equals(seat.getRow())&& otherSeat.getColumn().equals(seat.getColumn())){
+                throw new IllegalArgumentException("The seat with row and column "+seat.getRow()+" "+seat.getColumn()+" already exists in the hall!");
+            }
+        }
+
+        boolean isNew = false;
+        if(seat.getId() == null || seat.getId().isEmpty()){  //isNew tell us if the seat we want to add is new(we want to add it) or not (we want to edit it, so it already has an id)
+            isNew = true;
+        }
+
+        if(isNew && seats.size() >=hall.getCapacity()){
+            throw new IllegalArgumentException("Hall is already full!");
         }
         seatRepository.save(seat);
     }
 
     public void saveMovie(Movie movie){
+        if (movie.getTitle().trim().isEmpty() || movie.getTitle() == null){
+            throw new IllegalArgumentException("Movie must have a name!");
+        }
+        if (movie.getDurationMin() <= 0){
+            throw new IllegalArgumentException("Duration can't be negative or zero!");
+        }
+
         movieRepository.save(movie);
     }
 
@@ -73,7 +147,7 @@ public class CinemaService {
             throw new IllegalArgumentException("Screening cannot be added because the movie with id "+ screening.getMovieId()+" does not exist!");
         }
 
-        for(Screening object: screeningRepository.findByHallId(screening.getHallId())){
+        for(Screening object: findScreeningsByHallId(screening.getHallId())){
             if(!object.getId().equals(screening.getId()) && datesOverlap(object, screening)){
                 throw new IllegalArgumentException("Screening cannot be saved because its date overlaps with the other screenings");
             }
@@ -123,19 +197,43 @@ public class CinemaService {
     }
 
     public List<Hall> findHallsByTheatreId(String id){
-        return hallRepository.findByTheatreId(id);
+        List<Hall> halls = new ArrayList<>();
+        for(Hall hall: hallRepository.findAll()){
+            if(hall.getTheatreId().equals(id)){
+                halls.add(hall);
+            }
+        }
+        return halls;
     }
 
     public List<Screening> findScreeningsByHallId(String id){
-        return screeningRepository.findByHallId(id);
+        List<Screening> screenings = new ArrayList<>();
+        for(Screening screening: screeningRepository.findAll()){
+            if(screening.getHallId().equals(id)){
+                screenings.add(screening);
+            }
+        }
+        return screenings;
     }
 
     public List<Screening> findScreeningsByMovieId(String id){
-        return screeningRepository.findByMovieId(id);
+        List<Screening> screenings = new ArrayList<>();
+        for(Screening screening: screeningRepository.findAll()){
+            if(screening.getMovieId().equals(id)){
+                screenings.add(screening);
+            }
+        }
+        return screenings;
     }
 
     public List<Seat> findSeatsByHallId(String id){
-        return seatRepository.findByHallId(id);
+        List<Seat> seats = new ArrayList<>();
+        for(Seat seat: seatRepository.findAll()){
+            if(seat.getHallId().equals(id)){
+                seats.add(seat);
+            }
+        }
+        return seats;
     }
 
     public void deleteScreening(String screeningId){
@@ -170,7 +268,7 @@ public class CinemaService {
         if(movieRepository.findById(id) == null){
             throw new IllegalArgumentException("You can't delete a movie that doesn't exist!");
         }
-        if (!screeningRepository.findByMovieId(id).isEmpty()) {
+        if (!findScreeningsByMovieId(id).isEmpty()) {
             throw new IllegalArgumentException("Movie with id " + id + " cannot be deleted because it has screenings!");
         }
         movieRepository.delete(id);
@@ -183,9 +281,9 @@ public class CinemaService {
             throw new IllegalArgumentException("Theatre with id "+id+" doesn't exist!");
         }
 
-        List<Hall> halls = hallRepository.findByTheatreId(id);
+        List<Hall> halls = findHallsByTheatreId(id);
         for(Hall hall: halls) {
-            List<Seat> seats = seatRepository.findByHallId(hall.getId());
+            List<Seat> seats = findSeatsByHallId(hall.getId());
             for (Seat seat : seats) {
                 seatRepository.delete(seat.getId());
             }
@@ -200,7 +298,7 @@ public class CinemaService {
             throw new IllegalArgumentException("Hall with id "+id+" doesn't exist!");
         }
 
-        List<Seat> seats = seatRepository.findByHallId(hall.getId());
+        List<Seat> seats = findSeatsByHallId(hall.getId());
         for (Seat seat : seats) {
             seatRepository.delete(seat.getId());
         }
@@ -230,7 +328,7 @@ public class CinemaService {
             throw new IllegalArgumentException("Hall with id "+hallId+" doesn't exist!");
         }
 
-        List<Seat> seats = seatRepository.findByHallId(hallId);
+        List<Seat> seats = findSeatsByHallId(hallId);
         for(Seat seat: seats){
             setSeatAvailability(seat.getId(), availability);
         }
@@ -245,7 +343,7 @@ public class CinemaService {
             throw new IllegalArgumentException("Theatre with id "+theatreId+" doesn't exist!");
         }
 
-        List<Hall> halls = hallRepository.findByTheatreId(theatreId);
+        List<Hall> halls = findHallsByTheatreId(theatreId);
         for(Hall hall: halls){
             setHallAvailability(hall.getId(),availability);
         }
@@ -258,21 +356,21 @@ public class CinemaService {
         if(theatreRepository.findById(theatreId) == null){
             throw new IllegalArgumentException("Theatre with id "+theatreId+" does not exist!");
         }
-        return hallRepository.findByTheatreId(theatreId).size();
+        return findHallsByTheatreId(theatreId).size();
     }
 
     public int numberOfSeatsInHall(String hallId){
         if(hallRepository.findById(hallId) == null){
             throw new IllegalArgumentException("Hall with id "+hallId+" does not exist!");
         }
-        return seatRepository.findByHallId(hallId).size();
+        return findSeatsByHallId(hallId).size();
     }
 
     public int numberOfScreeningsOfMovie(String movieId){
         if(movieRepository.findById(movieId) == null){
             throw new IllegalArgumentException("Movie with id "+movieId+" does not exist!");
         }
-        return screeningRepository.findByMovieId(movieId).size();
+        return findScreeningsByMovieId(movieId).size();
     }
 
     public List<Movie> moviesByGenre(Genre genre){

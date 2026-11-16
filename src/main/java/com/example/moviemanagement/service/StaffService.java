@@ -1,7 +1,7 @@
 package com.example.moviemanagement.service;
 
 import com.example.moviemanagement.model.*;
-import com.example.moviemanagement.repository.*;
+import com.example.moviemanagement.repository.BaseRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,12 +9,12 @@ import java.util.List;
 
 @Service
 public class StaffService {
-    public final SupportStaffRepository supportStaffRepository;
-    public final TechnicalOperatorRepository technicalOperatorRepository;
-    public final StaffAssignmentRepository staffAssignmentRepository;
-    public final ScreeningRepository screeningRepository;
+    public final BaseRepository<SupportStaff> supportStaffRepository;
+    public final BaseRepository<TechnicalOperator> technicalOperatorRepository;
+    public final BaseRepository<StaffAssignment> staffAssignmentRepository;
+    public final BaseRepository<Screening> screeningRepository;
 
-    public StaffService(SupportStaffRepository supportStaffRepository, TechnicalOperatorRepository technicalOperatorRepository, StaffAssignmentRepository staffAssignmentRepository, ScreeningRepository screeningRepository) {
+    public StaffService(BaseRepository<SupportStaff> supportStaffRepository, BaseRepository<TechnicalOperator> technicalOperatorRepository, BaseRepository<StaffAssignment> staffAssignmentRepository, BaseRepository<Screening> screeningRepository) {
         this.supportStaffRepository = supportStaffRepository;
         this.technicalOperatorRepository = technicalOperatorRepository;
         this.staffAssignmentRepository = staffAssignmentRepository;
@@ -22,7 +22,7 @@ public class StaffService {
     }
 
     public void saveStaff(Staff staff){
-        if (staff.getName() == null){
+        if (staff.getName() == null || staff.getName().trim().isEmpty()){
             throw new IllegalArgumentException("Staff must have a name!");
         }
         if (staff instanceof SupportStaff){
@@ -32,7 +32,7 @@ public class StaffService {
             if (technicalOperatorRepository.findById(staff.getId()) != null){
                 throw new IllegalArgumentException("Id " + staff.getId() + " is already in use!");
             }
-            supportStaffRepository.save(staff);
+            supportStaffRepository.save((SupportStaff) staff);
         }
         else if (staff instanceof TechnicalOperator){
             if (((TechnicalOperator) staff).getSpecialization() == null){
@@ -41,7 +41,7 @@ public class StaffService {
             if (supportStaffRepository.findById(staff.getId()) != null){
                 throw new IllegalArgumentException("Id " + staff.getId() + " is already in use!");
             }
-            technicalOperatorRepository.save(staff);
+            technicalOperatorRepository.save((TechnicalOperator) staff);
         }
         else{
             throw new IllegalArgumentException("Staff must be either SupportStaff or TechnicalOperator!");
@@ -53,14 +53,18 @@ public class StaffService {
         if (staff != null){
             return staff;
         }
-        return technicalOperatorRepository.findById(staffId);
+        staff = technicalOperatorRepository.findById(staffId);
+        if (staff == null){
+            throw new IllegalArgumentException("Staff member with id " + staffId + " not found!");
+        }
+        return staff;
     }
 
     public List<Staff> findAllSupportStaff(){
-        return supportStaffRepository.findAll();
+        return new ArrayList<>(supportStaffRepository.findAll());
     }
     public List<Staff> findAllTechnicalOperator(){
-        return technicalOperatorRepository.findAll();
+        return new ArrayList<>(technicalOperatorRepository.findAll());
     }
     public List<Staff> findAllTechnicalOperators(){
         return findAllTechnicalOperator();
@@ -68,9 +72,6 @@ public class StaffService {
 
     public void deleteStaff(String staffId){
         Staff staff = findStaffById(staffId);
-        if(staff == null){
-            throw new IllegalArgumentException("Can't delete Staff that doesn't exist");
-        }
         List<String> assignmentIds = new ArrayList<>();
         for(StaffAssignment assignment : staffAssignmentRepository.findAll()){
             if(assignment.getStaffId().equals(staffId)){
@@ -91,9 +92,6 @@ public class StaffService {
 
     public void saveStaffAssignment(StaffAssignment staffAssignment){
         Staff staff = findStaffById(staffAssignment.getStaffId());
-        if (staff == null){
-            throw new IllegalArgumentException("Staff doesn't exist");
-        }
         if(screeningRepository.findById(staffAssignment.getScreeningId()) == null){
             throw new IllegalArgumentException("Screening doesn't exist!!!");
         }
@@ -108,6 +106,9 @@ public class StaffService {
     }
 
     public StaffAssignment findStaffAssignmentById(String id){
+        if (staffAssignmentRepository.findById(id) == null){
+            throw new IllegalArgumentException("Assignment with " + id + "not found!");
+        }
         return staffAssignmentRepository.findById(id);
     }
 
@@ -120,10 +121,19 @@ public class StaffService {
         for (StaffAssignment assignment: staffAssignmentRepository.findAll()){
             if (!screeningId.equals(assignment.getScreeningId())) continue;
             Staff staff = findStaffById(assignment.getStaffId());
-            if (staff != null) {
-                assignedStaff.add(staff);
-            }
+            assignedStaff.add(staff);
         }
         return assignedStaff;
     }
+
+    public List<StaffAssignment> findStaffAssignmentsForScreening(String screeningId){
+        List<StaffAssignment> result = new ArrayList<>();
+        for (StaffAssignment assignment : staffAssignmentRepository.findAll()){
+            if (screeningId.equals(assignment.getScreeningId())){
+                result.add(assignment);
+            }
+        }
+        return result;
+    }
+
 }

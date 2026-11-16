@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket details</title>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<h1>Ticket details</h1>
+<p>id: <span th:text="${ticket.id}"></span></p>
+<p>screeningId: <span th:text="${ticket.screeningId}"></span></p>
+<p>customerId: <span th:text="${ticket.customerId}"></span></p>
+<p>seatId: <span th:text="${ticket.seatId}"></span></p>
+<p>price: <span th:text="${ticket.price}"></span></p>
+</body>
+</html>

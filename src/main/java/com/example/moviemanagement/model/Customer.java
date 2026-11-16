@@ -25,7 +25,7 @@ public class Customer implements HasId {
         ticketList = new ArrayList<>();
     }
 
-    public void addTicket(Ticket ticket){
+    public void addTicket(Ticket ticket) {
         this.ticketList.add(ticket);
     }
 

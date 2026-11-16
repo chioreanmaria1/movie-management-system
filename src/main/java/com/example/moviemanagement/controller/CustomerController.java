@@ -20,19 +20,42 @@ public class CustomerController {
         model.addAttribute("customers", customerService.findAllCustomers());
         return "customer/index";
     }
+
     @GetMapping("/new")
     public String createCustomer(Model model){
         model.addAttribute("customer", new Customer());
         return "customer/form";
     }
+
     @PostMapping
     public String saveCustomer(@ModelAttribute Customer customer){
         customerService.saveCustomer(customer);
         return "redirect:/customers";
     }
-    @PostMapping("{id}/delete")
+
+    @PostMapping("/{id}/delete")
     public String deleteCustomer(@PathVariable String id){
         customerService.deleteCustomer(id);
+        return "redirect:/customers";
+    }
+
+    @GetMapping("/{id}")
+    public String details(Model model, @PathVariable String id){
+        model.addAttribute("customer", customerService.findCustomerById(id));
+        model.addAttribute("tickets", customerService.findTicketsByCustomerId(id));
+        return "customer/details";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable String id){
+        model.addAttribute("customer", customerService.findCustomerById(id));
+        return "customer/edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String updateCustomer(@PathVariable String id, @ModelAttribute Customer customer){
+        customer.setId(id);
+        customerService.saveCustomer(customer);
         return "redirect:/customers";
     }
 }

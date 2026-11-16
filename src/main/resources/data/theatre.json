@@ -1,0 +1,61 @@
+[ {
+  "id" : "dc819960-5e7f-43ff-9e3e-3a9123b67c4d",
+  "name" : "CinemaCity",
+  "city" : "Cluj-Napoca",
+  "available" : true,
+  "halls" : [ ]
+}, {
+  "id" : "bc4414c0-28b6-4365-ab6e-fbf94ab8569b",
+  "name" : "Cinema City Polus",
+  "city" : "Cluj-Napoca",
+  "available" : true,
+  "halls" : [ ]
+}, {
+  "id" : "6beb4094-a3f7-4062-890d-d7fab2563cec",
+  "name" : "Cinema Florin Piersic",
+  "city" : "Cluj-Napoca",
+  "available" : true,
+  "halls" : [ ]
+}, {
+  "id" : "ba2448ba-faa5-4406-94bb-3b5e85174d17",
+  "name" : "Cinema Arta",
+  "city" : "Cluj-Napoca",
+  "available" : true,
+  "halls" : [ ]
+}, {
+  "id" : "c435ce01-1acc-45ef-8fb0-2d6e7b2cab68",
+  "name" : "Cinema City Vivo",
+  "city" : "Constanta",
+  "available" : true,
+  "halls" : [ ]
+}, {
+  "id" : "51832f8b-f9ae-4d48-9c15-3da1fb5c4eb0",
+  "name" : "Cinema City Afi",
+  "city" : "Bucuresti",
+  "available" : true,
+  "halls" : [ ]
+}, {
+  "id" : "7eae32b4-74dd-4af8-b19e-8504aacd8571",
+  "name" : "Cinema City Mega Mall",
+  "city" : "Bucuresti",
+  "available" : false,
+  "halls" : [ ]
+}, {
+  "id" : "196cb3bb-a889-4b37-83cc-471e408941a2",
+  "name" : "Cinema Elvira Popescu",
+  "city" : "Bucuresti",
+  "available" : false,
+  "halls" : [ ]
+}, {
+  "id" : "d85a9aa2-c4d3-40a0-b7da-2ff06d37818a",
+  "name" : "Cinema City Sun Plaza",
+  "city" : "Bucuresti",
+  "available" : true,
+  "halls" : [ ]
+}, {
+  "id" : "551a63e8-65ff-4796-9780-49d09ae175e9",
+  "name" : "Cinema Dacia",
+  "city" : "Baia Mare",
+  "available" : true,
+  "halls" : [ ]
+} ]

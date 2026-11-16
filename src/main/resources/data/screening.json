@@ -1,0 +1,71 @@
+[ {
+  "id" : "47ab3891-65ec-44f7-81f1-433a298a4dca",
+  "hallId" : "75a3f232-360d-4a48-b3c3-9eab00750052",
+  "movieId" : "02af0062-38fe-41a8-a6bc-7a8a5b6a4d7c",
+  "date" : "2026-11-17T19:26:00",
+  "tickets" : [ ],
+  "assignments" : [ ]
+}, {
+  "id" : "33d419e6-d343-4c7e-8700-636ee3f03e37",
+  "hallId" : "75a3f232-360d-4a48-b3c3-9eab00750052",
+  "movieId" : "cee2b1a1-c36f-4648-b685-d180213a5ccb",
+  "date" : "2026-11-20T19:48:00",
+  "tickets" : [ ],
+  "assignments" : [ ]
+}, {
+  "id" : "2c9a89cd-44e1-4faf-88aa-f947aa1360b3",
+  "hallId" : "0d931178-84a0-4c94-93d6-21e2bca22aff",
+  "movieId" : "cee2b1a1-c36f-4648-b685-d180213a5ccb",
+  "date" : "2026-11-17T19:49:00",
+  "tickets" : [ ],
+  "assignments" : [ ]
+}, {
+  "id" : "cddbb219-56cb-42c6-a3f0-a5fa6c84751d",
+  "hallId" : "0d931178-84a0-4c94-93d6-21e2bca22aff",
+  "movieId" : "ebe625ff-901b-4cf0-8a8c-ea4740950680",
+  "date" : "2026-11-24T19:49:00",
+  "tickets" : [ ],
+  "assignments" : [ ]
+}, {
+  "id" : "44f8bba9-8e3c-45fe-9f78-cbaeea8d993a",
+  "hallId" : "f8d8f45a-b3d1-4ae4-8cc1-68d6d32f3709",
+  "movieId" : "ebe625ff-901b-4cf0-8a8c-ea4740950680",
+  "date" : "2026-11-16T23:50:00",
+  "tickets" : [ ],
+  "assignments" : [ ]
+}, {
+  "id" : "c4e456e6-b917-4813-ba0c-0d69339eea8c",
+  "hallId" : "75a3f232-360d-4a48-b3c3-9eab00750052",
+  "movieId" : "57293cae-4067-4d98-aedf-7c02b039c334",
+  "date" : "2026-11-27T19:50:00",
+  "tickets" : [ ],
+  "assignments" : [ ]
+}, {
+  "id" : "19980c4f-0d3d-4d4e-82d2-a35393cb8df6",
+  "hallId" : "75a3f232-360d-4a48-b3c3-9eab00750052",
+  "movieId" : "4444b237-9042-42a8-9ea0-27f9bee15158",
+  "date" : "2026-11-23T19:50:00",
+  "tickets" : [ ],
+  "assignments" : [ ]
+}, {
+  "id" : "46c4aa28-6c29-404b-9c49-a8999296b6d5",
+  "hallId" : "f047cc2e-7779-418a-a6ef-e2bccb61ee54",
+  "movieId" : "4444b237-9042-42a8-9ea0-27f9bee15158",
+  "date" : "2026-11-19T19:51:00",
+  "tickets" : [ ],
+  "assignments" : [ ]
+}, {
+  "id" : "30609539-0b8c-40da-b5a0-807f4f61c64a",
+  "hallId" : "7e1f0c1f-cbc2-492a-882c-42cee89edc64",
+  "movieId" : "02af0062-38fe-41a8-a6bc-7a8a5b6a4d7c",
+  "date" : "2026-11-25T19:51:00",
+  "tickets" : [ ],
+  "assignments" : [ ]
+}, {
+  "id" : "682f6db0-8f05-4834-ada1-56c4202d4fe5",
+  "hallId" : "7e1f0c1f-cbc2-492a-882c-42cee89edc64",
+  "movieId" : "4444b237-9042-42a8-9ea0-27f9bee15158",
+  "date" : "2026-11-18T19:52:00",
+  "tickets" : [ ],
+  "assignments" : [ ]
+} ]

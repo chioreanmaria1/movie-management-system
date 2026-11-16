@@ -1,0 +1,41 @@
+[ {
+  "id" : "54233014-7b7d-4555-80a3-3e8c76fea312",
+  "name" : "Haloomo Moolo",
+  "specialization" : "PROJECTION"
+}, {
+  "id" : "80375922-3b77-4d7a-892d-e0d008f80779",
+  "name" : "Gustav Condurache",
+  "specialization" : "PROJECTION"
+}, {
+  "id" : "e47309ae-9cf0-4c65-8a4a-48df3f424d2c",
+  "name" : "Pop Andrei",
+  "specialization" : "PROJECTION"
+}, {
+  "id" : "96b13f2f-10aa-4d6e-8a57-a738007d0860",
+  "name" : "Popescu Mihai",
+  "specialization" : "SOUND"
+}, {
+  "id" : "763876c8-c7a2-4339-83d3-776e3c2e48b3",
+  "name" : "Manea Andrei",
+  "specialization" : "PROJECTION"
+}, {
+  "id" : "85dee6c6-1553-40ef-8819-11e6a6de9ce9",
+  "name" : "Waldrof Bella",
+  "specialization" : "SOUND"
+}, {
+  "id" : "597bb775-82c9-4dc9-9321-612b6df91143",
+  "name" : "Vaslui Anastasia",
+  "specialization" : "SOUND"
+}, {
+  "id" : "a77e6a6d-4eca-4acd-9cd1-26f0931c67d5",
+  "name" : "Becali Gigi",
+  "specialization" : "SOUND"
+}, {
+  "id" : "9faf9299-91c5-435b-9167-59500fe4f563",
+  "name" : "Dincă Anamaria",
+  "specialization" : "SOUND"
+}, {
+  "id" : "86434d38-0797-423c-9942-8153f2fb788d",
+  "name" : "Sofran Teodora ",
+  "specialization" : "PROJECTION"
+} ]

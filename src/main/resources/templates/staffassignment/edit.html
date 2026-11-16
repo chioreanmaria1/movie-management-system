@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Staff Assignment</title>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+<h1>Edit Staff Assignment</h1>
+<form th:action="@{'/staffassignments/'+${staffAssignment.id}+'/edit'}" th:object="${staffAssignment}" method="post">
+    id: <input type="text" th:field="*{id}" readonly> <br>
+    screeningId: <input type="text" th:field="*{screeningId}"> <br>
+    staffId: <input type="text" th:field="*{staffId}"> <br>
+    <button type="submit">Save changes</button>
+</form>
+</body>
+</html>
