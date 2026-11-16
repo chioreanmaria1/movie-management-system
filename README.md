@@ -13,20 +13,24 @@ The project has a Model-Repository-Service-Controller structure.
 src/main/java/com/example/moviemanagement/
 |
 |-- model/        # UML Entities (Theatre, Hall, Seat, Movie, Screening, Customer, Ticket, Staff, etc.)
-|-- repository/   # In-Memory data management using LinkedHashMap
+|-- repository/   
 |-- service/      # Business logic (CinemaService, CustomerService, StaffService, BookingService)
 |-- controller/   # Web controllers for handling requests
 
 src/main/resources/
 |
-|-- templates/    # Thymeleaf pages, one folder per entity (index.html and form.html)
+|-- templates/    # Thymeleaf pages, one folder per entity 
+|-- data/         # JSON flat-file storage (one file per entity)
 |-- application.properties
 ```
 
-Each entity has a repository that stores its objects in a LinkedHashMap, which gives O(1) lookup by id.
-The interface BaseRepository contains the functionality common to all repositories.
-The abstract class InMemoryRepository implements it and holds the map.
-Each concrete repository extends InMemoryRepository and implements the abstract hasId method.
+The interface `BaseRepository` defines the four operations common to all repositories: `findAll`, `findById`, `save`, and `delete`. There are two implementations:
+
+**`InMemoryRepository` (abstract, `repository/memory/`)**
+Stores objects in a `LinkedHashMap<String, T>`, which gives O(1) lookup by id. Each concrete subclass (e.g. `MovieRepository`) extends it. This was the original storage layer.
+
+**`InFileRepository` (abstract, `repository/file/`)**
+The active storage layer. Persists objects as a JSON array in a flat file using Jackson's `ObjectMapper`. Every `save` and `delete` reads the whole file, mutates the list in memory, and writes it back. `findAll` deserialises the file on each call; `findById` iterates the result. If the file does not exist or is empty, `findAll` returns an empty list. New objects without an id get a random UUID assigned on save. Each concrete subclass (e.g. `MovieInFileRepository`) is a `@Repository` bean that reads its file path from `application.properties` via `@Value`.
 
 When objects are saved, the internal lists inside entities (for example the list of halls inside a theatre) stay empty. This avoids data redundancy and keeps the repositories as the single source of truth, while still matching the UML structure. Relations are therefore resolved through ids and repository lookups, not through these lists.
 
@@ -40,6 +44,19 @@ When objects are saved, the internal lists inside entities (for example the list
 | StaffService | Staff and staff assignments |
 
 Services validate foreign keys before saving. For example, a hall can only be saved if its theatreId refers to an existing theatre.
+
+## Domain Model
+
+```
+Theatre ──< Hall ──< Seat
+              │
+              └──< Screening >── Movie
+                       │
+                       ├──< Ticket >── Customer
+                       └──< StaffAssignment >── SupportStaff / TechnicalOperator
+```
+
+Seats use a grid of rows **A–T** and columns **1–20** (max hall capacity: 400 seats).
 
 ## Business Rules
 
@@ -94,6 +111,21 @@ Special field types:
 - **Enum fields:** shown as a `<select>`. The controller puts all the enum values in the model (for example `Genre.values()` under the name `genres`), and the template creates one `<option>` for each value.
 - **Boolean fields:** shown as a checkbox (for example `ageRestricted`).
 
+Each entity also has two additional pages:
+- **`details.html`:** shows all fields of a single record. Where the entity has dependents (for example a movie has screenings, a theatre has halls), the page also lists them in a table with a link to each one's own details page. The controller fetches the dependents by id and puts them in the model alongside the main entity.
+- **`edit.html`:** a pre-filled form for updating an existing record. The id is shown as plain text (not editable). All other fields work the same way as in `form.html`. On submit, the controller calls the service to overwrite the record and redirects back to the index.
+
+### Error Handling
+
+Errors are handled centrally by `GlobalExceptionHandler`, a `@ControllerAdvice` class that intercepts exceptions thrown anywhere in the application and renders `error.html` instead of letting the app crash.
+
+| Exception type | `errorTitle` shown |
+|---|---|
+| `IllegalArgumentException` | "Invalid data or action is not allowed!" |
+| Any other `Exception` | "Unexpected Error!" |
+
+In both cases the original exception message is passed to the template as `errorMessage` and displayed on the page. A **Back to the previous page** link (using `javascript:history.back()`) lets the user return to whatever they were doing without losing context.
+
 ## Deletion Rules
 
 The system uses three kinds of deletion, depending on how much the entity matters to the rest of the data. In every case, trying to delete an entity that does not exist throws an IllegalArgumentException.
@@ -115,6 +147,23 @@ The system uses three kinds of deletion, depending on how much the entity matter
 - Deleting a seat does not check for tickets, so tickets may remain that refer to a seat that no longer exists.
 - Making a hall or a seat available again does not check whether its parent (theatre or hall) is available.
 
+## Data Storage
+
+All data is persisted as JSON files under `src/main/resources/data/`. Paths are configured in `application.properties`. No database setup is required — the app reads and writes these files directly on startup and on each save.
+
+| File | Entity |
+|---|---|
+| `theatre.json` | Theatre |
+| `hall.json` | Hall |
+| `seat.json` | Seat |
+| `movie.json` | Movie |
+| `screening.json` | Screening |
+| `ticket.json` | Ticket |
+| `customer.json` | Customer |
+| `support-staff.json` | SupportStaff |
+| `technical-operator.json` | TechnicalOperator |
+| `staff-assignment.json` | StaffAssignment |
+
 ## Running the Application
 
 ```bash
@@ -123,8 +172,3 @@ mvn spring-boot:run
 
 The application starts on http://localhost:8080 by default.
 
-## Running the Tests
-
-```bash
-mvn test
-```
