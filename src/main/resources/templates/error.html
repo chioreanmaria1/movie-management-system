@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Errors</title>
+</head>
+<body>
+<h2 th:text="${errorTitle}" style="color: #ff0051;">Errors</h2>
+<p th:text="${errorMessage}">Error message here.</p>
+
+<a href="javascript:history.back()">Back to the previous page</a>
+</body>
+</html>

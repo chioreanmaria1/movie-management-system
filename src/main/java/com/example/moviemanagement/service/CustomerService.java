@@ -18,8 +18,11 @@ public class CustomerService {
     }
 
     public void saveCustomer(Customer customer){
-        if(customer.getName() == null ){
+        if(customer.getName() == null || customer.getName().trim().isEmpty()){
             throw new IllegalArgumentException("Customer's name cannot be empty!");
+        }
+        if (customer.getBirthDate() == null){
+            throw new IllegalArgumentException("Customer has to insert a date!");
         }
         customerRepository.save(customer);
     }
