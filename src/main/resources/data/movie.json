@@ -5,4 +5,67 @@
   "ageRestricted" : true,
   "durationMin" : 150,
   "screenings" : [ ]
+}, {
+  "id" : "cee2b1a1-c36f-4648-b685-d180213a5ccb",
+  "title" : "La La Land",
+  "genre" : "ROMANCE",
+  "ageRestricted" : false,
+  "durationMin" : 200,
+  "screenings" : [ ]
+}, {
+  "id" : "5590b99b-b248-468a-b127-72ebcff2ff72",
+  "title" : "The Hangover",
+  "genre" : "COMEDY",
+  "ageRestricted" : true,
+  "durationMin" : 100,
+  "screenings" : [ ]
+}, {
+  "id" : "ebe625ff-901b-4cf0-8a8c-ea4740950680",
+  "title" : "Avatar: The Way of Water",
+  "genre" : "SCIENCE_FICTION",
+  "ageRestricted" : false,
+  "durationMin" : 192,
+  "screenings" : [ ]
+}, {
+  "id" : "c573ebb8-7dc3-4c20-9b35-5d6f8eb41664",
+  "title" : "Inception",
+  "genre" : "SCIENCE_FICTION",
+  "ageRestricted" : true,
+  "durationMin" : 175,
+  "screenings" : [ ]
+}, {
+  "id" : "6e1c7170-d789-4a7f-b6bf-fc1592853831",
+  "title" : "The Godfather",
+  "genre" : "ACTION",
+  "ageRestricted" : true,
+  "durationMin" : 175,
+  "screenings" : [ ]
+}, {
+  "id" : "4444b237-9042-42a8-9ea0-27f9bee15158",
+  "title" : "The Dark Knight",
+  "genre" : "ACTION",
+  "ageRestricted" : true,
+  "durationMin" : 152,
+  "screenings" : [ ]
+}, {
+  "id" : "67e67c6f-16db-46d6-8ee1-bd715d0498c8",
+  "title" : "Interstellar",
+  "genre" : "SCIENCE_FICTION",
+  "ageRestricted" : false,
+  "durationMin" : 169,
+  "screenings" : [ ]
+}, {
+  "id" : "57293cae-4067-4d98-aedf-7c02b039c334",
+  "title" : "Joker",
+  "genre" : "ACTION",
+  "ageRestricted" : true,
+  "durationMin" : 122,
+  "screenings" : [ ]
+}, {
+  "id" : "a17ef16c-652c-455c-9829-71c7f7306e7b",
+  "title" : "Dune: Part Two",
+  "genre" : "SCIENCE_FICTION",
+  "ageRestricted" : false,
+  "durationMin" : 166,
+  "screenings" : [ ]
 } ]

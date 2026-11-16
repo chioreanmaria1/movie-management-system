@@ -6,4 +6,76 @@
   "available" : true,
   "screenings" : [ ],
   "seats" : [ ]
+}, {
+  "id" : "f047cc2e-7779-418a-a6ef-e2bccb61ee54",
+  "name" : "Hall2",
+  "theatreId" : "6beb4094-a3f7-4062-890d-d7fab2563cec",
+  "capacity" : 100,
+  "available" : true,
+  "screenings" : [ ],
+  "seats" : [ ]
+}, {
+  "id" : "f8d8f45a-b3d1-4ae4-8cc1-68d6d32f3709",
+  "name" : "Hall3",
+  "theatreId" : "6beb4094-a3f7-4062-890d-d7fab2563cec",
+  "capacity" : 200,
+  "available" : true,
+  "screenings" : [ ],
+  "seats" : [ ]
+}, {
+  "id" : "6ff50be7-76b4-49c6-99ae-041f1b281f81",
+  "name" : "Hall4",
+  "theatreId" : "6beb4094-a3f7-4062-890d-d7fab2563cec",
+  "capacity" : 150,
+  "available" : true,
+  "screenings" : [ ],
+  "seats" : [ ]
+}, {
+  "id" : "0d931178-84a0-4c94-93d6-21e2bca22aff",
+  "name" : "Hall1",
+  "theatreId" : "51832f8b-f9ae-4d48-9c15-3da1fb5c4eb0",
+  "capacity" : 100,
+  "available" : true,
+  "screenings" : [ ],
+  "seats" : [ ]
+}, {
+  "id" : "ba543a66-75eb-4540-94a9-33b269580e68",
+  "name" : "Hall2",
+  "theatreId" : "51832f8b-f9ae-4d48-9c15-3da1fb5c4eb0",
+  "capacity" : 200,
+  "available" : true,
+  "screenings" : [ ],
+  "seats" : [ ]
+}, {
+  "id" : "2da20e71-a561-4575-8fcd-a234abb60485",
+  "name" : "Hall3",
+  "theatreId" : "51832f8b-f9ae-4d48-9c15-3da1fb5c4eb0",
+  "capacity" : 200,
+  "available" : true,
+  "screenings" : [ ],
+  "seats" : [ ]
+}, {
+  "id" : "2ecba86a-849c-4363-99dd-6729d70a2596",
+  "name" : "Hall1",
+  "theatreId" : "551a63e8-65ff-4796-9780-49d09ae175e9",
+  "capacity" : 100,
+  "available" : true,
+  "screenings" : [ ],
+  "seats" : [ ]
+}, {
+  "id" : "d8fe97b9-3d40-4182-ad67-655700e48775",
+  "name" : "Hall2",
+  "theatreId" : "551a63e8-65ff-4796-9780-49d09ae175e9",
+  "capacity" : 200,
+  "available" : true,
+  "screenings" : [ ],
+  "seats" : [ ]
+}, {
+  "id" : "7e1f0c1f-cbc2-492a-882c-42cee89edc64",
+  "name" : "Hall3",
+  "theatreId" : "551a63e8-65ff-4796-9780-49d09ae175e9",
+  "capacity" : 100,
+  "available" : true,
+  "screenings" : [ ],
+  "seats" : [ ]
 } ]
