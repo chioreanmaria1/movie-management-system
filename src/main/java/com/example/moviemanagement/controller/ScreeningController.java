@@ -68,7 +68,8 @@ public class ScreeningController {
         Screening screening  = service.findScreeningById(id);
         model.addAttribute("screening", screening);
         model.addAttribute("tickets", bookingService.getTicketsByScreening(id));
-        model.addAttribute("assignments", staffService.findStaffForScreening(id));
+        model.addAttribute("assignments", staffService.findStaffAssignmentsForScreening(id));
+        model.addAttribute("assignments", staffService.findStaffAssignmentsForScreening(id));
         return "screening/details";
     }
 }

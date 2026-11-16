@@ -1,1 +1,61 @@
-[ ]
+[ {
+  "id" : "57239952-0b79-4a51-9c79-b66de6d16c94",
+  "screeningId" : "47ab3891-65ec-44f7-81f1-433a298a4dca",
+  "customerId" : "362940a7-562e-47d4-b2a6-afbae00a3d50",
+  "seatId" : "3942e855-9e44-4bfc-9ee8-5b03f7ec7a75",
+  "price" : 25.0
+}, {
+  "id" : "91212785-a106-426f-b8ce-e13b07936176",
+  "screeningId" : "47ab3891-65ec-44f7-81f1-433a298a4dca",
+  "customerId" : "b93e55a1-cbdd-4aea-a5e4-9bad098fd8d8",
+  "seatId" : "75655477-145b-4966-b139-575f8bb9a4dc",
+  "price" : 24.0
+}, {
+  "id" : "676138a9-8963-4c88-aa1e-3d2b3c3dc1e9",
+  "screeningId" : "47ab3891-65ec-44f7-81f1-433a298a4dca",
+  "customerId" : "317b8ae1-7678-4f5c-a610-c09a9a085a21",
+  "seatId" : "7b682e4e-e347-493b-904d-3c5570c68b33",
+  "price" : 34.0
+}, {
+  "id" : "d73f9e54-d37d-4cab-9ec8-00876d6948ae",
+  "screeningId" : "33d419e6-d343-4c7e-8700-636ee3f03e37",
+  "customerId" : "c8934d3f-f81c-4f28-90ca-d14c780d7de2",
+  "seatId" : "7e614da9-f2ee-4dbc-ab97-086deaed8476",
+  "price" : 22.0
+}, {
+  "id" : "8360df71-0664-4c58-8606-fac66fe7fd72",
+  "screeningId" : "33d419e6-d343-4c7e-8700-636ee3f03e37",
+  "customerId" : "38c869e8-0dae-4339-9259-630b987c0992",
+  "seatId" : "e21bca16-4b67-48df-9992-dbd6f2b4be75",
+  "price" : 34.0
+}, {
+  "id" : "93f4ed2e-71d2-469f-9f18-0be5443ee455",
+  "screeningId" : "33d419e6-d343-4c7e-8700-636ee3f03e37",
+  "customerId" : "451d50a6-ad34-4afa-b354-09a69df44f06",
+  "seatId" : "d461f6b5-9ed4-426c-8341-88f7601b3307",
+  "price" : 34.0
+}, {
+  "id" : "d850e12f-bccb-49bf-98b9-cf9f412236b1",
+  "screeningId" : "19980c4f-0d3d-4d4e-82d2-a35393cb8df6",
+  "customerId" : "0e185d27-a7e5-494f-8f67-5b5176c02db0",
+  "seatId" : "581417fb-5f5c-469e-b4bf-de485ba6cd19",
+  "price" : 45.0
+}, {
+  "id" : "040b79f6-ef45-4d59-b140-fa44b52de75e",
+  "screeningId" : "19980c4f-0d3d-4d4e-82d2-a35393cb8df6",
+  "customerId" : "a21dfacd-8d67-49db-8935-e64724d82b7e",
+  "seatId" : "9903b0ed-7dea-4447-a6d1-4653f1247585",
+  "price" : 53.0
+}, {
+  "id" : "e3de128a-0cf4-417c-b759-762ff3eb6fe8",
+  "screeningId" : "c4e456e6-b917-4813-ba0c-0d69339eea8c",
+  "customerId" : "f46ca6a6-dc6e-455a-855b-fc96006b2cae",
+  "seatId" : "b459a5d8-1bfa-46c4-80cc-bb107a8fab5a",
+  "price" : 34.0
+}, {
+  "id" : "72a62cf3-105c-4a24-ad90-7d62b7f88926",
+  "screeningId" : "c4e456e6-b917-4813-ba0c-0d69339eea8c",
+  "customerId" : "ab209550-9389-4b51-a84f-fa0a015f3320",
+  "seatId" : "5488995e-8836-43c0-90e3-919af0a5b191",
+  "price" : 45.0
+} ]

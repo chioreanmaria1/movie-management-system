@@ -106,6 +106,9 @@ public class StaffService {
     }
 
     public StaffAssignment findStaffAssignmentById(String id){
+        if (staffAssignmentRepository.findById(id) == null){
+            throw new IllegalArgumentException("Assignment with " + id + "not found!");
+        }
         return staffAssignmentRepository.findById(id);
     }
 
@@ -122,4 +125,15 @@ public class StaffService {
         }
         return assignedStaff;
     }
+
+    public List<StaffAssignment> findStaffAssignmentsForScreening(String screeningId){
+        List<StaffAssignment> result = new ArrayList<>();
+        for (StaffAssignment assignment : staffAssignmentRepository.findAll()){
+            if (screeningId.equals(assignment.getScreeningId())){
+                result.add(assignment);
+            }
+        }
+        return result;
+    }
+
 }
