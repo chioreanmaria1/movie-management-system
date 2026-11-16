@@ -24,6 +24,8 @@ public class SeatController {
     @GetMapping("/new")
     public String createSeat(Model model){
         model.addAttribute("seat", new Seat());
+        model.addAttribute("rows", service.getSeatRows());
+        model.addAttribute("columns", service.getSeatColumns());
         return "seat/form";
     }
 
@@ -43,6 +45,8 @@ public class SeatController {
     public String edit(@PathVariable String id, Model model){
         Seat seat = service.findSeatById(id);
         model.addAttribute("seat", seat);
+        model.addAttribute("rows", service.getSeatRows());
+        model.addAttribute("columns", service.getSeatColumns());
         return "seat/edit";
     }
 
